@@ -122,7 +122,7 @@ export class UpdateUserInfoDto {
 		countryCode?: string,
 		currency?: string,
 		externalId?: string,
-		uniqueId?: string
+		uniqueId?: string,
 	) {
 		this.id = id;
 		this.userName = userName;

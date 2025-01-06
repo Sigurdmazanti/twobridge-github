@@ -8,7 +8,10 @@ import { Response } from 'express';
 import { AuthHeadersDto } from 'src/common/dto/headers-auth.dto';
 import { testDtoValidation } from 'src/common/helpers/test-helper';
 import { axiosError } from 'src/common/helpers/axios-object-helper';
-import { GetUserOrdersQueryParamsDto, GetUserOrdersResponseDto } from './dto/get-user-orders.dto';
+import {
+	GetUserOrdersQueryParamsDto,
+	GetUserOrdersResponseDto,
+} from './dto/get-user-orders.dto';
 import { OrderDto } from './dto/order.dto';
 import { OrderLineDto } from './dto/orderline.dto';
 
@@ -47,7 +50,6 @@ describe('OrdersController', () => {
 		jest.clearAllMocks();
 	});
 
-
 	it('should be defined', () => {
 		expect(controller).toBeDefined();
 	});
@@ -60,23 +62,30 @@ describe('OrdersController', () => {
 
 			const mockQueryParams: GetUserOrdersQueryParamsDto = {
 				pageSize: 5,
-				sortBy: "TOTAL_PRICE"
+				sortBy: 'TOTAL_PRICE',
 			};
 
 			const mockOrder: OrderDto = {
 				id: '123',
-				customerCompany: 'KEA'
-			}
+				customerCompany: 'KEA',
+			};
 
 			const mockResponse: GetUserOrdersResponseDto = {
 				totalOrdersCount: 10,
-				orders: [mockOrder]
+				orders: [mockOrder],
 			};
 
 			ordersService.getUserOrders.mockResolvedValueOnce(mockResponse);
-			await controller.getUserOrders(mockAuthHeader, mockQueryParams, mockExpressResponse);
+			await controller.getUserOrders(
+				mockAuthHeader,
+				mockQueryParams,
+				mockExpressResponse,
+			);
 
-			expect(ordersService.getUserOrders).toHaveBeenCalledWith(mockAuthHeader, mockQueryParams);
+			expect(ordersService.getUserOrders).toHaveBeenCalledWith(
+				mockAuthHeader,
+				mockQueryParams,
+			);
 			expect(sendResponse).toHaveBeenCalledWith(
 				mockExpressResponse,
 				mockResponse,
@@ -84,31 +93,35 @@ describe('OrdersController', () => {
 			expect(mockResponse.totalOrdersCount).toBe(10);
 			expect(mockResponse.orders).toHaveLength(1);
 			expect(mockResponse.orders[0]).toEqual(mockOrder);
-		})
+		});
 
 		it('should throw an exception if OrdersService.getUserOrders fails', async () => {
 			const mockAuthHeader: AuthHeadersDto = {
 				authorization: 'Invalid token',
 			};
-	
+
 			const mockQueryParams: GetUserOrdersQueryParamsDto = {
 				pageSize: 5,
-				sortBy: "TOTAL_PRICE",
+				sortBy: 'TOTAL_PRICE',
 			};
-	
+
 			ordersService.getUserOrders.mockRejectedValueOnce(axiosError);
-	
+
 			await expect(
-				controller.getUserOrders(mockAuthHeader, mockQueryParams, mockExpressResponse),
+				controller.getUserOrders(
+					mockAuthHeader,
+					mockQueryParams,
+					mockExpressResponse,
+				),
 			).rejects.toThrow(new HttpException('Not Found', 404));
 		});
-	})
+	});
 
 	describe('Orders DTO validation tests', () => {
 		it('should validate OrderDto with invalid data types', async () => {
-			await expect(
-				testDtoValidation(OrderDto),
-			).rejects.toThrow(BadRequestException);
+			await expect(testDtoValidation(OrderDto)).rejects.toThrow(
+				BadRequestException,
+			);
 		});
 
 		it('should validate OrderLineDto with invalid data types', async () => {

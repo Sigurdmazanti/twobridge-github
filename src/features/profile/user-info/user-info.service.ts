@@ -21,9 +21,9 @@ export class UserInfoService {
 			{
 				dynamicweb: (httpService) =>
 					new DynamicwebUserInfoStrategy(httpService),
-				umbraco: (httpService) => 
+				umbraco: (httpService) =>
 					new UmbracoUserInfoStrategy(httpService),
-				shopify: (httpService) => 
+				shopify: (httpService) =>
 					new ShopifyUserInfoStrategy(httpService),
 			},
 			httpService,

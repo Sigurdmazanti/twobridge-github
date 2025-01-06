@@ -4,16 +4,23 @@ import { plainToClass } from 'class-transformer';
 import {
 	handleError,
 	handleResponse,
-    handleShopifyError,
+	handleShopifyError,
 } from 'src/common/helpers/utils/return-utils';
 import { AuthHeadersDto } from 'src/common/dto/headers-auth.dto';
-import { createAuthHeaders, splitBearerToken } from 'src/common/helpers/utils/headers-utils';
+import {
+	createAuthHeaders,
+	splitBearerToken,
+} from 'src/common/helpers/utils/headers-utils';
 import { OrdersStrategy } from '../interfaces/orders-strategy.interface';
 import {
 	GetUserOrdersQueryParamsDto,
 	GetUserOrdersResponseDto,
 } from '../dto/get-user-orders.dto';
-import { mapDynamicwebGetUserOrdersQueryParams, mapShopifyGetUserOrdersQueryParams, mapShopifyGetUserOrdersResponse } from '../mapping/get-user-orders.mapper';
+import {
+	mapDynamicwebGetUserOrdersQueryParams,
+	mapShopifyGetUserOrdersQueryParams,
+	mapShopifyGetUserOrdersResponse,
+} from '../mapping/get-user-orders.mapper';
 import { detectShopifyErrors } from 'src/common/helpers/shopify/utils/get-error-code-util';
 
 export class ShopifyOrdersStrategy implements OrdersStrategy {
@@ -25,20 +32,21 @@ export class ShopifyOrdersStrategy implements OrdersStrategy {
 	): Promise<GetUserOrdersResponseDto> {
 		try {
 			const token = splitBearerToken(authHeader as any);
-			const mappedQueryParams = mapShopifyGetUserOrdersQueryParams(queryParams);
-            
-            const variables: any = {
-                customerAccessToken: token,
-                pageSize: mappedQueryParams.pageSize ?? 5
-            };
-            
-            if (mappedQueryParams.afterCursor)
-                variables.afterCursor = mappedQueryParams.afterCursor;
+			const mappedQueryParams =
+				mapShopifyGetUserOrdersQueryParams(queryParams);
 
-            if (mappedQueryParams.sortBy)
-                variables.sortKey = mappedQueryParams.sortBy;
+			const variables: any = {
+				customerAccessToken: token,
+				pageSize: mappedQueryParams.pageSize ?? 5,
+			};
 
-            const query = `query customerOrders(
+			if (mappedQueryParams.afterCursor)
+				variables.afterCursor = mappedQueryParams.afterCursor;
+
+			if (mappedQueryParams.sortBy)
+				variables.sortKey = mappedQueryParams.sortBy;
+
+			const query = `query customerOrders(
                 $customerAccessToken: String!,
                 $pageSize: Int,
                 $afterCursor: String,
@@ -185,35 +193,32 @@ export class ShopifyOrdersStrategy implements OrdersStrategy {
                     }
                 }
             }`;
-                 
-        
-            const response = await firstValueFrom(
-                this.httpService.post(
-                    process.env.SHOPIFY_STOREFRONT_API_URL,
-                    {
-                        query: query,
-                        variables
-                    },
-                    {
-                        headers: {
-                            'X-Shopify-Storefront-Access-Token': process.env.SHOPIFY_PUBLIC_KEY,
-                        },
-                    }
-                )
-            );
-            
-            const shopifyErrors = detectShopifyErrors(response.data);
 
-            if (shopifyErrors) {
-                response.data = handleShopifyError(shopifyErrors);
-            }
+			const response = await firstValueFrom(
+				this.httpService.post(
+					process.env.SHOPIFY_STOREFRONT_API_URL,
+					{
+						query: query,
+						variables,
+					},
+					{
+						headers: {
+							'X-Shopify-Storefront-Access-Token':
+								process.env.SHOPIFY_PUBLIC_KEY,
+						},
+					},
+				),
+			);
 
-            else {
-                response.data = mapShopifyGetUserOrdersResponse(response.data);
-            }
-            
+			const shopifyErrors = detectShopifyErrors(response.data);
+
+			if (shopifyErrors) {
+				response.data = handleShopifyError(shopifyErrors);
+			} else {
+				response.data = mapShopifyGetUserOrdersResponse(response.data);
+			}
+
 			return handleResponse(response);
-
 		} catch (error) {
 			return handleError(error);
 		}

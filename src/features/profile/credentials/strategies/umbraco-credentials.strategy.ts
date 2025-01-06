@@ -32,7 +32,6 @@ export class UmbracoCredentialsStrategy implements CredentialsStrategy {
 			);
 
 			return handleResponse(response);
-			
 		} catch (error) {
 			return handleError(error);
 		}

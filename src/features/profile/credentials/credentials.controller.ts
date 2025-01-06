@@ -1,34 +1,42 @@
-import { Controller, Patch, Body, Res, Headers, HttpException } from '@nestjs/common';
+import {
+	Controller,
+	Patch,
+	Body,
+	Res,
+	Headers,
+	HttpException,
+} from '@nestjs/common';
 import { Response } from 'express';
 import { CredentialsService } from './credentials.service';
 import { sendResponse } from 'src/common/helpers/utils/return-utils';
 import { AuthHeadersDto } from 'src/common/dto/headers-auth.dto';
 import { ChangePasswordRequestDto } from './dto/change-password.dto';
-import { ApiBody, ApiHeader, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
+import {
+	ApiBody,
+	ApiHeader,
+	ApiOkResponse,
+	ApiOperation,
+} from '@nestjs/swagger';
 
 @Controller('profile/credentials')
 export class CredentialsController {
 	constructor(private credentialsService: CredentialsService) {}
 
-	@ApiOperation({ 
+	@ApiOperation({
 		summary: 'Change the password for the authenticated user.',
 	})
-
 	@ApiHeader({
 		name: 'authorization',
 		description:
 			'**Shopify**: The token generated from customRecover-email.\n\n**DynamicWeb**: The user access token.',
 		required: true,
 	})
-
 	@ApiBody({
-		type: ChangePasswordRequestDto
+		type: ChangePasswordRequestDto,
 	})
-	
 	@ApiOkResponse({
-        description: 'Password changed.',
-    })
-
+		description: 'Password changed.',
+	})
 	@Patch('changePassword')
 	async changePassword(
 		@Headers() authHeader: AuthHeadersDto,
@@ -42,7 +50,6 @@ export class CredentialsController {
 			);
 
 			return sendResponse(res, response);
-			
 		} catch (error) {
 			throw new HttpException(error, error.statusCode);
 		}

@@ -23,8 +23,11 @@ export function createAuthHeaders(authHeader?: string): {} {
 	return {};
 }
 
-export function splitBearerToken(authHeader: { authorization: string } | string): string | null {
-	const aHeader = typeof authHeader === 'string' ? authHeader : authHeader.authorization;
+export function splitBearerToken(
+	authHeader: { authorization: string } | string,
+): string | null {
+	const aHeader =
+		typeof authHeader === 'string' ? authHeader : authHeader.authorization;
 	const parts = aHeader.split(' ');
 
 	if (parts.length === 2) {

@@ -25,7 +25,7 @@ export const mapDynamicwebGetUserInfo = (
 	if (response?.currency) r.currency = response.currency;
 	if (response?.externalId) r.externalId = response.externalId;
 	if (response?.uniqueId) r.uniqueId = response.uniqueId;
-  
+
 	return r;
 };
 
@@ -36,7 +36,7 @@ export const mapShopifyGetUserInfo = (
 	const c = data.customer || data.customerUpdate?.customer;
 	const a = c?.defaultAddress || {};
 	const r: GetUserInfoResponseDto = {};
-  
+
 	// Safely map the fields with if statements
 	if (c?.id) r.id = c.id;
 	if (c?.displayName) r.userName = c.displayName;
@@ -45,7 +45,7 @@ export const mapShopifyGetUserInfo = (
 	if (c?.lastName) r.lastName = c.lastName;
 	if (c?.phone) r.phone = c.phone;
 	if (c?.email) r.email = c.email;
-  
+
 	if (a.address1) r.address = a.address1;
 	if (a.address2) r.address2 = a.address2;
 	if (a.city) r.city = a.city;

@@ -21,8 +21,8 @@ async function bootstrap() {
 	const options = new DocumentBuilder()
 		.setTitle('Twobridge')
 		.setDescription(
-			'Documentation for the Twobridge REST API.<br/><br/><h3>Important Note:</h3> <p>All HTTP status codes are handled by the external API.<br> Be cautious when relying on the status codes listed below for error handling or success confirmation, as they might not conform what the external API is returning.</p>'
-		  )		  
+			'Documentation for the Twobridge REST API.<br/><br/><h3>Important Note:</h3> <p>All HTTP status codes are handled by the external API.<br> Be cautious when relying on the status codes listed below for error handling or success confirmation, as they might not conform what the external API is returning.</p>',
+		)
 		.setVersion('1.0')
 		.build();
 

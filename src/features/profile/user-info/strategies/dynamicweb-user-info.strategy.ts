@@ -52,7 +52,6 @@ export class DynamicwebUserInfoStrategy implements UserInfoStrategy {
 
 			response.data = mapDynamicwebUpdateUserInfo(response.data);
 			return handleResponse(response);
-			
 		} catch (error) {
 			return handleError(error);
 		}

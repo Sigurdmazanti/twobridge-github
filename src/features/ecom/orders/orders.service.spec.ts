@@ -4,9 +4,11 @@ import { HttpService } from '@nestjs/axios';
 import * as strategyHelper from 'src/common/helpers/strategy-helper';
 import { DynamicwebOrdersStrategy } from './strategies/dynamicweb-orders.strategy';
 import { AuthHeadersDto } from 'src/common/dto/headers-auth.dto';
-import { GetUserOrdersQueryParamsDto, GetUserOrdersResponseDto } from './dto/get-user-orders.dto';
+import {
+	GetUserOrdersQueryParamsDto,
+	GetUserOrdersResponseDto,
+} from './dto/get-user-orders.dto';
 import { OrderDto } from './dto/order.dto';
-
 
 describe('OrdersService', () => {
 	let service: OrdersService;
@@ -63,24 +65,31 @@ describe('OrdersService', () => {
 
 		const mockQueryParams: GetUserOrdersQueryParamsDto = {
 			pageSize: 5,
-			sortBy: "TOTAL_PRICE"
+			sortBy: 'TOTAL_PRICE',
 		};
 
 		const mockOrder: OrderDto = {
 			id: '123',
-			customerCompany: 'KEA'
-		}
+			customerCompany: 'KEA',
+		};
 
 		const mockResponse: GetUserOrdersResponseDto = {
 			totalOrdersCount: 10,
-			orders: [mockOrder]
+			orders: [mockOrder],
 		};
-	  
-		const getUserOrdersSpy = jest.spyOn(service['strategy'], 'getUserOrders').mockResolvedValue(mockResponse);
-	  
-		const result = await service.getUserOrders(mockAuthHeader, mockQueryParams);
-		expect(getUserOrdersSpy).toHaveBeenCalledWith(mockAuthHeader, mockQueryParams);
+
+		const getUserOrdersSpy = jest
+			.spyOn(service['strategy'], 'getUserOrders')
+			.mockResolvedValue(mockResponse);
+
+		const result = await service.getUserOrders(
+			mockAuthHeader,
+			mockQueryParams,
+		);
+		expect(getUserOrdersSpy).toHaveBeenCalledWith(
+			mockAuthHeader,
+			mockQueryParams,
+		);
 		expect(result).toEqual(mockResponse);
 	});
-
 });

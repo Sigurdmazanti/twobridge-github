@@ -74,7 +74,7 @@ export class PriceDto {
 		vatFormatted?: string,
 		vatPercent?: number,
 		vatPercentFormatted?: string,
-		currencyCode?: string
+		currencyCode?: string,
 	) {
 		this.showPricesWithVat = showPricesWithVat;
 		this.price = price;
@@ -104,21 +104,21 @@ export class PriceBeforeDiscountDto extends PriceDto {
 		vatFormatted?: string,
 		vatPercent?: number,
 		vatPercentFormatted?: string,
-		currencyCode?: string
+		currencyCode?: string,
 	) {
 		super(
-		showPricesWithVat,
-		price,
-		priceFormatted,
-		priceWithoutVat,
-		priceWithoutVatFormatted,
-		priceWithVat,
-		priceWithVatFormatted,
-		vat,
-		vatFormatted,
-		vatPercent,
-		vatPercentFormatted,
-		currencyCode
+			showPricesWithVat,
+			price,
+			priceFormatted,
+			priceWithoutVat,
+			priceWithoutVatFormatted,
+			priceWithVat,
+			priceWithVatFormatted,
+			vat,
+			vatFormatted,
+			vatPercent,
+			vatPercentFormatted,
+			currencyCode,
 		);
 	}
 }

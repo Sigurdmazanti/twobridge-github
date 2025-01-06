@@ -29,7 +29,6 @@ export class DynamicwebAuthStrategy implements AuthStrategy {
 
 			response.data = mapDynamicwebSignInResponse(response.data);
 			return handleResponse(response);
-			
 		} catch (error) {
 			return handleError(error);
 		}
@@ -50,7 +49,6 @@ export class DynamicwebAuthStrategy implements AuthStrategy {
 
 			response.data = mapDynamicwebRefreshTokenResponse(response.data);
 			return handleResponse(response);
-
 		} catch (error) {
 			return handleError(error);
 		}

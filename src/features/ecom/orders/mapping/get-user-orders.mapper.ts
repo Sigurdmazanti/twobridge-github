@@ -29,7 +29,7 @@ export const mapDynamicwebGetUserOrdersResponse = (
 ): Partial<GetUserOrdersResponseDto> => {
 	const r: Partial<GetUserOrdersResponseDto> = {};
 
-	if(q.totalOrdersCount) r.totalOrdersCount = q.totalOrdersCount;
+	if (q.totalOrdersCount) r.totalOrdersCount = q.totalOrdersCount;
 	r.orders = q.orders.map((order) => mapDynamicwebOrder(order));
 
 	return r;
@@ -79,9 +79,12 @@ export const mapShopifyGetUserOrdersResponse = (
 		},
 	};
 
-	if(o.totalCount) r.totalOrdersCount = !isNaN(Number(o.totalCount)) ? Number(o.totalCount) : 0;
-	if(o.pageInfo?.endCursor) r.afterCursor = o.pageInfo.endCursor;
-	
+	if (o.totalCount)
+		r.totalOrdersCount = !isNaN(Number(o.totalCount))
+			? Number(o.totalCount)
+			: 0;
+	if (o.pageInfo?.endCursor) r.afterCursor = o.pageInfo.endCursor;
+
 	r.orders = oEdges.map((order: any) => mapShopifyOrder(order.node, cInfo));
 
 	return r;
@@ -89,11 +92,11 @@ export const mapShopifyGetUserOrdersResponse = (
 
 export const mapUmbracoGetUserOrdersResponse = (
 	q: Partial<GetUserOrdersResponseDto>,
-	queryParams: GetUserOrdersQueryParamsDto
+	queryParams: GetUserOrdersQueryParamsDto,
 ): Partial<GetUserOrdersResponseDto> => {
 	const r: Partial<GetUserOrdersResponseDto> = {};
 
-	if(Array.isArray(q) && q.length) {
+	if (Array.isArray(q) && q.length) {
 		r.totalOrdersCount = q.length;
 
 		if (queryParams?.pageSize) {

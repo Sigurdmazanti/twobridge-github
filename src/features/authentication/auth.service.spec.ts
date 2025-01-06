@@ -58,16 +58,18 @@ describe('AuthService', () => {
 
 	it('should call signIn on the strategy', async () => {
 		const mockCredentials: SignInRequestDto = {
-		  username: faker.internet.username(),
-		  password: faker.internet.password(),
+			username: faker.internet.username(),
+			password: faker.internet.password(),
 		};
-	  
-		const mockResponse: SignInResponseDto = { 
-			token: 'token' 
+
+		const mockResponse: SignInResponseDto = {
+			token: 'token',
 		};
-	  
-		const signInSpy = jest.spyOn(service['strategy'], 'signIn').mockResolvedValue(mockResponse);
-	  
+
+		const signInSpy = jest
+			.spyOn(service['strategy'], 'signIn')
+			.mockResolvedValue(mockResponse);
+
 		const result = await service.signIn(mockCredentials);
 		expect(signInSpy).toHaveBeenCalledWith(mockCredentials);
 		expect(result).toEqual(mockResponse);
@@ -82,8 +84,10 @@ describe('AuthService', () => {
 			token: 'new-token',
 		};
 
-		const refreshTokenSpy = jest.spyOn(service['strategy'], 'refreshToken').mockResolvedValue(mockResponse);
-	  
+		const refreshTokenSpy = jest
+			.spyOn(service['strategy'], 'refreshToken')
+			.mockResolvedValue(mockResponse);
+
 		const result = await service.refreshToken(mockAuthHeader);
 		expect(refreshTokenSpy).toHaveBeenCalledWith(mockAuthHeader);
 		expect(result).toEqual(mockResponse);

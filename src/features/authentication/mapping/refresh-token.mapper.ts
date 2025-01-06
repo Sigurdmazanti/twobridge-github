@@ -10,8 +10,10 @@ export const mapDynamicwebRefreshTokenResponse = (
 
 export const mapShopifyRefreshTokenResponse = (
 	response: any,
-): RefreshTokenResponseDto => {	
-	const r = new RefreshTokenResponseDto(response.data.data.customerAccessTokenRenew.customerAccessToken.accessToken);
+): RefreshTokenResponseDto => {
+	const r = new RefreshTokenResponseDto(
+		response.data.data.customerAccessTokenRenew.customerAccessToken.accessToken,
+	);
 
 	return r;
 };

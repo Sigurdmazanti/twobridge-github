@@ -5,7 +5,7 @@ import { AuthHeadersDto } from 'src/common/dto/headers-auth.dto';
 import {
 	handleError,
 	handleResponse,
-    handleShopifyError,
+	handleShopifyError,
 } from 'src/common/helpers/utils/return-utils';
 import {
 	ChangePasswordRequestDto,
@@ -23,10 +23,12 @@ export class ShopifyCredentialsStrategy implements CredentialsStrategy {
 		resetPassword: ChangePasswordRequestDto,
 	): Promise<ChangePasswordResponseDto> {
 		try {
-            
-            const id = await getShopifyCustomerIdByToken(authHeader, this.httpService);
-            const token = splitBearerToken(authHeader as any);
-            
+			const id = await getShopifyCustomerIdByToken(
+				authHeader,
+				this.httpService,
+			);
+			const token = splitBearerToken(authHeader as any);
+
 			const query = `mutation customerReset($id: ID!, $input: CustomerResetInput!) {
                 customerReset(id: $id, input: $input) {
                     customerUserErrors {
@@ -42,35 +44,35 @@ export class ShopifyCredentialsStrategy implements CredentialsStrategy {
                 }
             }`;
 
-            const response = await firstValueFrom(
-                this.httpService.post(
-                    process.env.SHOPIFY_STOREFRONT_API_URL,
-                    {
-                        query: query,
-                        variables: {
-                            id: id,
-                            input: {
-                                password: resetPassword.password,
-                                resetToken: token
-                            }
-                        },
-                    },
-                    {
-                        headers: {
-                            'X-Shopify-Storefront-Access-Token': process.env.SHOPIFY_PUBLIC_KEY,
-                        },
-                    }
-                )
-            );
+			const response = await firstValueFrom(
+				this.httpService.post(
+					process.env.SHOPIFY_STOREFRONT_API_URL,
+					{
+						query: query,
+						variables: {
+							id: id,
+							input: {
+								password: resetPassword.password,
+								resetToken: token,
+							},
+						},
+					},
+					{
+						headers: {
+							'X-Shopify-Storefront-Access-Token':
+								process.env.SHOPIFY_PUBLIC_KEY,
+						},
+					},
+				),
+			);
 
-            const shopifyErrors = detectShopifyErrors(response.data);
+			const shopifyErrors = detectShopifyErrors(response.data);
 
-            if (shopifyErrors) {
-                response.data = handleShopifyError(shopifyErrors);
-            }
-            
+			if (shopifyErrors) {
+				response.data = handleShopifyError(shopifyErrors);
+			}
+
 			return handleResponse(response);
-
 		} catch (error) {
 			return handleError(error);
 		}

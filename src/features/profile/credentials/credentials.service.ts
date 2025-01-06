@@ -21,9 +21,9 @@ export class CredentialsService {
 			{
 				dynamicweb: (httpService) =>
 					new DynamicwebCredentialsStrategy(httpService),
-				umbraco: (httpService) => 
+				umbraco: (httpService) =>
 					new UmbracoCredentialsStrategy(httpService),
-				shopify: (httpService) => 
+				shopify: (httpService) =>
 					new ShopifyCredentialsStrategy(httpService),
 			},
 			httpService,

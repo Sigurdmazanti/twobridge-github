@@ -12,7 +12,10 @@ import {
 	GetUserOrdersQueryParamsDto,
 	GetUserOrdersResponseDto,
 } from '../dto/get-user-orders.dto';
-import { mapDynamicwebGetUserOrdersQueryParams, mapDynamicwebGetUserOrdersResponse } from '../mapping/get-user-orders.mapper';
+import {
+	mapDynamicwebGetUserOrdersQueryParams,
+	mapDynamicwebGetUserOrdersResponse,
+} from '../mapping/get-user-orders.mapper';
 
 export class DynamicwebOrdersStrategy implements OrdersStrategy {
 	constructor(private readonly httpService: HttpService) {}
@@ -22,7 +25,6 @@ export class DynamicwebOrdersStrategy implements OrdersStrategy {
 		queryParams: GetUserOrdersQueryParamsDto = {},
 	): Promise<GetUserOrdersResponseDto> {
 		try {
-			
 			const refreshHeaders = createAuthHeaders(authHeader.authorization);
 			const mappedQueryParams =
 				mapDynamicwebGetUserOrdersQueryParams(queryParams);
@@ -31,7 +33,6 @@ export class DynamicwebOrdersStrategy implements OrdersStrategy {
 			).toString();
 
 			console.log(refreshHeaders);
-			
 
 			const response = await firstValueFrom(
 				this.httpService.get(
@@ -39,10 +40,9 @@ export class DynamicwebOrdersStrategy implements OrdersStrategy {
 					{ headers: refreshHeaders },
 				),
 			);
-		
+
 			response.data = mapDynamicwebGetUserOrdersResponse(response.data);
 			return handleResponse(response);
-
 		} catch (error) {
 			return handleError(error);
 		}

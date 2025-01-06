@@ -34,7 +34,7 @@ describe('UserInfoService', () => {
 				{
 					provide: HttpService,
 					useValue: mockHttpService,
-				}
+				},
 			],
 		}).compile();
 
@@ -53,17 +53,19 @@ describe('UserInfoService', () => {
 
 	it('should call getUserInfo on the strategy', async () => {
 		const mockAuthHeader: AuthHeadersDto = {
-			authorization: 'Bearer token'
+			authorization: 'Bearer token',
 		};
 
 		const mockResponse: GetUserInfoResponseDto = {
 			firstName: faker.person.firstName(),
 			lastName: faker.person.lastName(),
-			name: faker.person.fullName()
+			name: faker.person.fullName(),
 		};
-	  
-		const getUserInfoSpy = jest.spyOn(service['strategy'], 'getUserInfo').mockResolvedValue(mockResponse);
-	  
+
+		const getUserInfoSpy = jest
+			.spyOn(service['strategy'], 'getUserInfo')
+			.mockResolvedValue(mockResponse);
+
 		const result = await service.getUserInfo(mockAuthHeader);
 		expect(getUserInfoSpy).toHaveBeenCalledWith(mockAuthHeader);
 		expect(result).toEqual(mockResponse);
@@ -71,26 +73,33 @@ describe('UserInfoService', () => {
 
 	it('should call updateUserInfo on the strategy', async () => {
 		const mockAuthHeader: AuthHeadersDto = {
-			authorization: 'Bearer token'
+			authorization: 'Bearer token',
 		};
 
 		const mockUpdatedUserInfo: UpdateUserInfoDto = {
 			firstName: faker.person.firstName(),
 			lastName: faker.person.lastName(),
-			name: faker.person.fullName()
-		}
+			name: faker.person.fullName(),
+		};
 
 		const mockResponse: GetUserInfoResponseDto = {
 			firstName: faker.person.firstName(),
 			lastName: faker.person.lastName(),
-			name: faker.person.fullName()
+			name: faker.person.fullName(),
 		};
-	  
-		const updateUserInfoSpy = jest.spyOn(service['strategy'], 'updateUserInfo').mockResolvedValue(mockResponse);
-	  
-		const result = await service.updateUserInfo(mockAuthHeader, mockUpdatedUserInfo);
-		expect(updateUserInfoSpy).toHaveBeenCalledWith(mockAuthHeader, mockUpdatedUserInfo);
+
+		const updateUserInfoSpy = jest
+			.spyOn(service['strategy'], 'updateUserInfo')
+			.mockResolvedValue(mockResponse);
+
+		const result = await service.updateUserInfo(
+			mockAuthHeader,
+			mockUpdatedUserInfo,
+		);
+		expect(updateUserInfoSpy).toHaveBeenCalledWith(
+			mockAuthHeader,
+			mockUpdatedUserInfo,
+		);
 		expect(result).toEqual(mockResponse);
 	});
-
 });

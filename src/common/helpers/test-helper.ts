@@ -31,7 +31,7 @@ export async function testDtoValidation(dtoClass: any) {
 	if (!errors.every((error) => error instanceof ValidationError)) {
 		throw new Error('An error other than ValidationError was thrown');
 	}
-	
+
 	throw new BadRequestException(errors);
 }
 
@@ -43,7 +43,10 @@ export async function testDtoValidation(dtoClass: any) {
  * @param property - The property of the DTO class for which the invalid value is generated.
  * @returns An invalid value for the property based on its type.
  */
-export function generateInvalidValueForProperty(dtoClass: any, property: string): any {
+export function generateInvalidValueForProperty(
+	dtoClass: any,
+	property: string,
+): any {
 	const metadata = Reflect.getMetadata(
 		'design:type',
 		dtoClass.prototype,

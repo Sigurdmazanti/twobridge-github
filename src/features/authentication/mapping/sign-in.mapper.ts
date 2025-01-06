@@ -8,10 +8,10 @@ export const mapDynamicwebSignInResponse = (
 	return r;
 };
 
-export const mapShopifySignInResponse = (
-	response: any,
-): SignInResponseDto => {
-	const r = new SignInResponseDto(response.data.data.customerAccessTokenCreate.customerAccessToken.accessToken);
-	
+export const mapShopifySignInResponse = (response: any): SignInResponseDto => {
+	const r = new SignInResponseDto(
+		response.data.data.customerAccessTokenCreate.customerAccessToken.accessToken,
+	);
+
 	return r;
 };

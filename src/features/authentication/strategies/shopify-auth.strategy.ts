@@ -6,7 +6,7 @@ import { RefreshTokenResponseDto } from '../dto/refresh-token.dto';
 import {
 	handleError,
 	handleResponse,
-    handleShopifyError,
+	handleShopifyError,
 } from 'src/common/helpers/utils/return-utils';
 import { AuthHeadersDto } from 'src/common/dto/headers-auth.dto';
 import { mapShopifySignInResponse } from '../mapping/sign-in.mapper';
@@ -22,7 +22,7 @@ export class ShopifyAuthStrategy implements AuthStrategy {
 		credentials: SignInRequestDto,
 	): Promise<ApiResponseDto<SignInResponseDto>> {
 		try {
-            const query = `mutation SignInWithEmailAndPassword(
+			const query = `mutation SignInWithEmailAndPassword(
                 $email: String!, 
                 $password: String!,
             ) {
@@ -44,37 +44,35 @@ export class ShopifyAuthStrategy implements AuthStrategy {
                     }
                 }
             }`;
-            
-            const response = await firstValueFrom(
-                this.httpService.post(
-                    process.env.SHOPIFY_STOREFRONT_API_URL,
-                    {
-                        query: query,
-                        variables: {
-                            email: credentials.username,
-                            password: credentials.password,
-                        },
-                    },
-                    {
-                        headers: {
-                            'X-Shopify-Storefront-Access-Token': process.env.SHOPIFY_PUBLIC_KEY,
-                        },
-                    }
-                )
-            );
 
-            const shopifyErrors = detectShopifyErrors(response.data);
+			const response = await firstValueFrom(
+				this.httpService.post(
+					process.env.SHOPIFY_STOREFRONT_API_URL,
+					{
+						query: query,
+						variables: {
+							email: credentials.username,
+							password: credentials.password,
+						},
+					},
+					{
+						headers: {
+							'X-Shopify-Storefront-Access-Token':
+								process.env.SHOPIFY_PUBLIC_KEY,
+						},
+					},
+				),
+			);
 
-            if (shopifyErrors) {
-                response.data = handleShopifyError(shopifyErrors);
-            }
-            
-            else {
-                response.data = mapShopifySignInResponse(response);
-            }
-            
+			const shopifyErrors = detectShopifyErrors(response.data);
+
+			if (shopifyErrors) {
+				response.data = handleShopifyError(shopifyErrors);
+			} else {
+				response.data = mapShopifySignInResponse(response);
+			}
+
 			return handleResponse(response);
-			
 		} catch (error) {
 			return handleError(error);
 		}
@@ -84,10 +82,9 @@ export class ShopifyAuthStrategy implements AuthStrategy {
 		authHeader: AuthHeadersDto,
 	): Promise<ApiResponseDto<RefreshTokenResponseDto>> {
 		try {
+			const token = splitBearerToken(authHeader as any);
 
-            const token = splitBearerToken(authHeader as any);
-
-            const query = `mutation SignInWithAccessToken(
+			const query = `mutation SignInWithAccessToken(
                 $customerAccessToken: String!
             ) {
                 customerAccessTokenRenew(customerAccessToken: $customerAccessToken) {
@@ -101,37 +98,34 @@ export class ShopifyAuthStrategy implements AuthStrategy {
                     }
                 }
             }`;
-        
-            const response = await firstValueFrom(
-                this.httpService.post(
-                    process.env.SHOPIFY_STOREFRONT_API_URL,
-                    {
-                        query: query,
-                        variables: {
-                            customerAccessToken: token
-                        },
-                    },
-                    {
-                        headers: {
-                            'X-Shopify-Storefront-Access-Token': process.env.SHOPIFY_PUBLIC_KEY,
-                        },
-                    }
-                )
-            );
 
-            
-            const shopifyErrors = detectShopifyErrors(response.data);
+			const response = await firstValueFrom(
+				this.httpService.post(
+					process.env.SHOPIFY_STOREFRONT_API_URL,
+					{
+						query: query,
+						variables: {
+							customerAccessToken: token,
+						},
+					},
+					{
+						headers: {
+							'X-Shopify-Storefront-Access-Token':
+								process.env.SHOPIFY_PUBLIC_KEY,
+						},
+					},
+				),
+			);
 
-            if (shopifyErrors) {
-                response.data = handleShopifyError(shopifyErrors);
-            }
-            
-            else {
-                response.data = mapShopifyRefreshTokenResponse(response);
-            }
+			const shopifyErrors = detectShopifyErrors(response.data);
+
+			if (shopifyErrors) {
+				response.data = handleShopifyError(shopifyErrors);
+			} else {
+				response.data = mapShopifyRefreshTokenResponse(response);
+			}
 
 			return handleResponse(response);
-
 		} catch (error) {
 			return handleError(error);
 		}

@@ -18,17 +18,15 @@ export class UmbracoUserInfoStrategy implements UserInfoStrategy {
 	): Promise<GetUserInfoResponseDto> {
 		try {
 			const refreshHeaders = createAuthHeaders(authHeader.authorization);
-            refreshHeaders['Api-Key'] = process.env.UMBRACO_API_KEY;
+			refreshHeaders['Api-Key'] = process.env.UMBRACO_API_KEY;
 
 			const response = await firstValueFrom(
-				this.httpService.get(
-					`${process.env.UMBRACO_API_URL}/`,
-					{ headers: refreshHeaders },
-				),
+				this.httpService.get(`${process.env.UMBRACO_API_URL}/`, {
+					headers: refreshHeaders,
+				}),
 			);
 
 			return handleResponse(response);
-
 		} catch (error) {
 			return handleError(error);
 		}
@@ -40,7 +38,7 @@ export class UmbracoUserInfoStrategy implements UserInfoStrategy {
 	): Promise<GetUserInfoResponseDto> {
 		try {
 			const refreshHeaders = createAuthHeaders(authHeader.authorization);
-            refreshHeaders['Api-Key'] = process.env.UMBRACO_API_KEY;
+			refreshHeaders['Api-Key'] = process.env.UMBRACO_API_KEY;
 
 			const response = await firstValueFrom(
 				this.httpService.patch(
@@ -51,7 +49,6 @@ export class UmbracoUserInfoStrategy implements UserInfoStrategy {
 			);
 
 			return handleResponse(response);
-			
 		} catch (error) {
 			return handleError(error);
 		}

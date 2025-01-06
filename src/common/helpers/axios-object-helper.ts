@@ -5,8 +5,8 @@ export const axiosError = {
 	message: 'Not Found',
 	response: {
 		status: 404,
-		data: { 
-			message: 'Resource Not Found' 
+		data: {
+			message: 'Resource Not Found',
 		},
 	},
 } as AxiosError;
@@ -18,10 +18,9 @@ export const axiosSuccess = {
 	statusText: 'OK',
 	headers: {},
 	config: {
-	  headers: {}
+		headers: {},
 	} as AxiosRequestConfig,
-	data: { 
-		message: 'Resource Found' 
-	}
-  } as AxiosResponse;
-
+	data: {
+		message: 'Resource Found',
+	},
+} as AxiosResponse;

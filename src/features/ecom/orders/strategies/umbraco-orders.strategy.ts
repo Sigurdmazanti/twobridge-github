@@ -5,13 +5,20 @@ import {
 	handleResponse,
 } from 'src/common/helpers/utils/return-utils';
 import { AuthHeadersDto } from 'src/common/dto/headers-auth.dto';
-import { createAuthHeaders, splitBearerToken } from 'src/common/helpers/utils/headers-utils';
+import {
+	createAuthHeaders,
+	splitBearerToken,
+} from 'src/common/helpers/utils/headers-utils';
 import { OrdersStrategy } from '../interfaces/orders-strategy.interface';
 import {
 	GetUserOrdersQueryParamsDto,
 	GetUserOrdersResponseDto,
 } from '../dto/get-user-orders.dto';
-import { mapDynamicwebGetUserOrdersQueryParams, mapDynamicwebGetUserOrdersResponse, mapUmbracoGetUserOrdersResponse } from '../mapping/get-user-orders.mapper';
+import {
+	mapDynamicwebGetUserOrdersQueryParams,
+	mapDynamicwebGetUserOrdersResponse,
+	mapUmbracoGetUserOrdersResponse,
+} from '../mapping/get-user-orders.mapper';
 
 export class UmbracoOrdersStrategy implements OrdersStrategy {
 	constructor(private readonly httpService: HttpService) {}
@@ -26,18 +33,20 @@ export class UmbracoOrdersStrategy implements OrdersStrategy {
 			const response = await firstValueFrom(
 				this.httpService.get(
 					`${process.env.UMBRACO_API_URL}/umbraco/commerce/storefront/api/v1/customer/${customerReference}/orders`,
-					{ 
-                        headers: {
-                            'Api-Key': process.env.UMBRACO_API_KEY,
-                            'Store': process.env.UMBRACO_STORE 
-                        } 
-                    },
+					{
+						headers: {
+							'Api-Key': process.env.UMBRACO_API_KEY,
+							Store: process.env.UMBRACO_STORE,
+						},
+					},
 				),
 			);
 
-			response.data = mapUmbracoGetUserOrdersResponse(response.data, queryParams);
+			response.data = mapUmbracoGetUserOrdersResponse(
+				response.data,
+				queryParams,
+			);
 			return handleResponse(response);
-
 		} catch (error) {
 			return handleError(error);
 		}

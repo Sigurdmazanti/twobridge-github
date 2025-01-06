@@ -36,7 +36,7 @@ export class PaymentMethodDto {
 	@IsOptional()
 	@IsString()
 	termsDescription?: string;
-	
+
 	constructor(
 		id?: string,
 		name?: string,
@@ -44,7 +44,7 @@ export class PaymentMethodDto {
 		icon?: string,
 		code?: string,
 		termsCode?: string,
-		termsDescription?: string
+		termsDescription?: string,
 	) {
 		this.id = id;
 		this.name = name;

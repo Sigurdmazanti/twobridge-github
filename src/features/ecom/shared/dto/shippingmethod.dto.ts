@@ -68,7 +68,7 @@ export class ShippingMethodDto {
 		agentCode?: string,
 		agentName?: string,
 		agentServiceCode?: string,
-		agentServiceDescription?: string
+		agentServiceDescription?: string,
 	) {
 		this.id = id;
 		this.name = name;

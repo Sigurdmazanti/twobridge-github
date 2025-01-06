@@ -8,7 +8,12 @@ import {
 	sendResponse,
 } from 'src/common/helpers/utils/return-utils';
 import { AuthHeadersDto } from 'src/common/dto/headers-auth.dto';
-import { ApiBody, ApiHeader, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
+import {
+	ApiBody,
+	ApiHeader,
+	ApiOkResponse,
+	ApiOperation,
+} from '@nestjs/swagger';
 import { RefreshTokenResponseDto } from './dto/refresh-token.dto';
 
 @Controller('auth')
@@ -16,23 +21,17 @@ export class AuthController {
 	constructor(private authService: AuthService) {}
 
 	@Post('signIn')
-	@ApiOperation({ 
-		summary: 'Sign in as a frontend user.'
+	@ApiOperation({
+		summary: 'Sign in as a frontend user.',
 	})
-	
 	@ApiBody({
 		type: SignInRequestDto,
 	})
-
 	@ApiOkResponse({
-        description: 'Successful sign-in response.',
-        type: SignInResponseDto,
-    })
-
-	async signIn(
-		@Body() credentials: SignInRequestDto,
-		@Res() res: Response
-	) {
+		description: 'Successful sign-in response.',
+		type: SignInResponseDto,
+	})
+	async signIn(@Body() credentials: SignInRequestDto, @Res() res: Response) {
 		try {
 			const response = await this.authService.signIn(credentials);
 
@@ -43,22 +42,20 @@ export class AuthController {
 	}
 
 	@Get('refreshToken')
-	@ApiOperation({ 
+	@ApiOperation({
 		summary: 'Refresh the JWT user access token.',
-		description: '**Shopify**: Extends the expiration date/time of the token.\n\n**DynamicWeb**: Generates a new access token.'
+		description:
+			'**Shopify**: Extends the expiration date/time of the token.\n\n**DynamicWeb**: Generates a new access token.',
 	})
-
 	@ApiHeader({
 		name: 'authorization',
 		description: 'The user access token.',
 		required: true,
 	})
-
 	@ApiOkResponse({
-        description: 'Successful refresh token response.',
-        type: RefreshTokenResponseDto,
-    })
-
+		description: 'Successful refresh token response.',
+		type: RefreshTokenResponseDto,
+	})
 	async refreshToken(
 		@Headers() authHeader: AuthHeadersDto,
 		@Res() res: Response,
@@ -72,3 +69,5 @@ export class AuthController {
 		}
 	}
 }
+
+//TODO: HANDLE ERROR

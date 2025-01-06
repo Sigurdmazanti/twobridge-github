@@ -36,15 +36,18 @@ export function sendResponse(res: Response, response: any) {
  *
  * @throws {HttpException} Throws an `HttpException` with the appropriate status code and error message.
  */
-export function handleError<T = any>(
-	error: any,
-): ApiErrorResponseDto {
+export function handleError<T = any>(error: any): ApiErrorResponseDto {
 	const statusCode =
-		error.response?.status || error.status || HttpStatus.INTERNAL_SERVER_ERROR;
+		error.response?.status ||
+		error.status ||
+		HttpStatus.INTERNAL_SERVER_ERROR;
 
 	const errorMessage =
-		error.response?.data || error.data || error.message || 'An unexpected error occurred';
-	
+		error.response?.data ||
+		error.data ||
+		error.message ||
+		'An unexpected error occurred';
+
 	if (typeof errorMessage === 'string') {
 		throw new ApiErrorResponseDto(statusCode, errorMessage);
 	}
@@ -71,9 +74,7 @@ export function handleError<T = any>(
  *
  * @template T - The type of the response data, which can be any type (string, object, etc.).
  */
-export function handleResponse(
-	response: AxiosResponse,
-): ApiResponseDto {
+export function handleResponse(response: AxiosResponse): ApiResponseDto {
 	const statusCode = response.data?.status || response.status || 200;
 	const responseData = response.data;
 
@@ -99,17 +100,15 @@ export function handleResponse(
 /**
  * Handles Shopify error responses by returning a structured error object.
  *
- * @param {any} data - The error data received from the Shopify API. 
+ * @param {any} data - The error data received from the Shopify API.
  *                     This is expected to include details about the error, such as a `status` field.
- * 
+ *
  */
-export function handleShopifyError(
-	data: any
-) {
+export function handleShopifyError(data: any) {
 	return {
 		data: data,
-		status: data.status
-	}
+		status: data.status,
+	};
 }
 
 /**

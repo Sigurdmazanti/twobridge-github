@@ -4,7 +4,10 @@ import { HttpService } from '@nestjs/axios';
 import * as strategyHelper from 'src/common/helpers/strategy-helper';
 import { DynamicwebCredentialsStrategy } from './strategies/dynamicweb-credentials.strategy';
 import { AuthHeadersDto } from 'src/common/dto/headers-auth.dto';
-import { ChangePasswordRequestDto, ChangePasswordResponseDto } from './dto/change-password.dto';
+import {
+	ChangePasswordRequestDto,
+	ChangePasswordResponseDto,
+} from './dto/change-password.dto';
 import { faker } from '@faker-js/faker/.';
 
 describe('CredentialsService', () => {
@@ -33,9 +36,8 @@ describe('CredentialsService', () => {
 				{
 					provide: HttpService,
 					useValue: mockHttpService,
-				}
+				},
 			],
-			
 		}).compile();
 
 		service = module.get<CredentialsService>(CredentialsService);
@@ -62,18 +64,25 @@ describe('CredentialsService', () => {
 		};
 
 		const mockNewPassword: ChangePasswordRequestDto = {
-			password: faker.internet.password()
-		}
+			password: faker.internet.password(),
+		};
 
 		const mockResponse: ChangePasswordResponseDto = {
-			message: 'Password changed'
+			message: 'Password changed',
 		};
-	  
-		const changePasswordSpy = jest.spyOn(service['strategy'], 'changePassword').mockResolvedValue(mockResponse);
-	  
-		const result = await service.changePassword(mockAuthHeader, mockNewPassword);
-		expect(changePasswordSpy).toHaveBeenCalledWith(mockAuthHeader, mockNewPassword);
+
+		const changePasswordSpy = jest
+			.spyOn(service['strategy'], 'changePassword')
+			.mockResolvedValue(mockResponse);
+
+		const result = await service.changePassword(
+			mockAuthHeader,
+			mockNewPassword,
+		);
+		expect(changePasswordSpy).toHaveBeenCalledWith(
+			mockAuthHeader,
+			mockNewPassword,
+		);
 		expect(result).toEqual(mockResponse);
 	});
-
 });

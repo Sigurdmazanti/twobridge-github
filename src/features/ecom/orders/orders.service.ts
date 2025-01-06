@@ -21,15 +21,15 @@ export class OrdersService {
 			{
 				dynamicweb: (httpService) =>
 					new DynamicwebOrdersStrategy(httpService),
-				umbraco: (httpService) => 
+				umbraco: (httpService) =>
 					new UmbracoOrdersStrategy(httpService),
-				shopify: (httpService) => 
+				shopify: (httpService) =>
 					new ShopifyOrdersStrategy(httpService),
 			},
 			httpService,
 		);
 	}
-	
+
 	getUserOrders(
 		authHeader: AuthHeadersDto,
 		queryParams: GetUserOrdersQueryParamsDto,

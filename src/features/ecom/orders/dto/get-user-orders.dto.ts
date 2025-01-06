@@ -105,7 +105,11 @@ export class GetUserOrdersResponseDto extends ApiResponseDto {
 	@IsString()
 	afterCursor?: string;
 
-	constructor(totalOrdersCount?: number, orders?: OrderDto[], afterCursor?: string) {
+	constructor(
+		totalOrdersCount?: number,
+		orders?: OrderDto[],
+		afterCursor?: string,
+	) {
 		super();
 		this.totalOrdersCount = totalOrdersCount;
 		this.orders = orders;

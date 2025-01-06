@@ -123,7 +123,7 @@ export class GetUserInfoResponseDto extends ApiResponseDto {
 		countryCode?: string,
 		currency?: string,
 		externalId?: string,
-		uniqueId?: string
+		uniqueId?: string,
 	) {
 		super();
 		this.id = id;

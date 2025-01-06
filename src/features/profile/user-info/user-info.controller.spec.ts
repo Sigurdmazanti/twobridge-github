@@ -53,28 +53,30 @@ describe('UserInfoController', () => {
 	describe('getUserInfo', () => {
 		it('should call UserInfoService.getUserInfo with the correct credentials and return appropiate data', async () => {
 			const mockAuthHeader: AuthHeadersDto = {
-				authorization: 'Bearer token'
+				authorization: 'Bearer token',
 			};
 
 			const mockResponse: GetUserInfoResponseDto = {
 				firstName: faker.person.firstName(),
 				lastName: faker.person.lastName(),
-				name: faker.person.fullName()
+				name: faker.person.fullName(),
 			};
 
 			userInfoService.getUserInfo.mockResolvedValueOnce(mockResponse);
 
 			await controller.getUserInfo(mockAuthHeader, mockExpressResponse);
-			expect(userInfoService.getUserInfo).toHaveBeenCalledWith(mockAuthHeader);
+			expect(userInfoService.getUserInfo).toHaveBeenCalledWith(
+				mockAuthHeader,
+			);
 			expect(sendResponse).toHaveBeenCalledWith(
 				mockExpressResponse,
 				mockResponse,
 			);
-		})
+		});
 
 		it('should throw an exception if UserInfoService.getUserInfo fails', async () => {
 			const mockAuthHeader: AuthHeadersDto = {
-				authorization: 'Bearer token'
+				authorization: 'Bearer token',
 			};
 
 			userInfoService.getUserInfo.mockRejectedValueOnce(axiosError);
@@ -88,46 +90,57 @@ describe('UserInfoController', () => {
 	describe('updateUserInfo', () => {
 		it('should call UserInfoService.updateUserInfo with the correct credentials and return appropiate data', async () => {
 			const mockAuthHeader: AuthHeadersDto = {
-				authorization: 'Bearer token'
+				authorization: 'Bearer token',
 			};
 
 			const mockUpdatedUserInfo: UpdateUserInfoDto = {
 				firstName: faker.person.firstName(),
 				lastName: faker.person.lastName(),
-				name: faker.person.fullName()
-			}
+				name: faker.person.fullName(),
+			};
 
 			const mockResponse: GetUserInfoResponseDto = {
 				firstName: faker.person.firstName(),
 				lastName: faker.person.lastName(),
-				name: faker.person.fullName()
+				name: faker.person.fullName(),
 			};
 
 			userInfoService.updateUserInfo.mockResolvedValueOnce(mockResponse);
 
-			await controller.updateUserInfo(mockAuthHeader, mockUpdatedUserInfo, mockExpressResponse);
-			expect(userInfoService.updateUserInfo).toHaveBeenCalledWith(mockAuthHeader, mockUpdatedUserInfo);
+			await controller.updateUserInfo(
+				mockAuthHeader,
+				mockUpdatedUserInfo,
+				mockExpressResponse,
+			);
+			expect(userInfoService.updateUserInfo).toHaveBeenCalledWith(
+				mockAuthHeader,
+				mockUpdatedUserInfo,
+			);
 			expect(sendResponse).toHaveBeenCalledWith(
 				mockExpressResponse,
 				mockResponse,
 			);
-		})
+		});
 
 		it('should throw an exception if UserInfoService.updateUserInfo fails', async () => {
 			const mockAuthHeader: AuthHeadersDto = {
-				authorization: 'Invalid token'
+				authorization: 'Invalid token',
 			};
 
 			const mockUpdatedUserInfo: UpdateUserInfoDto = {
 				firstName: faker.person.firstName(),
 				lastName: faker.person.lastName(),
-				name: faker.person.fullName()
-			}
+				name: faker.person.fullName(),
+			};
 
 			userInfoService.updateUserInfo.mockRejectedValueOnce(axiosError);
 
 			await expect(
-				controller.updateUserInfo(mockAuthHeader, mockUpdatedUserInfo, mockExpressResponse),
+				controller.updateUserInfo(
+					mockAuthHeader,
+					mockUpdatedUserInfo,
+					mockExpressResponse,
+				),
 			).rejects.toThrow(new HttpException('Not Found', 404));
 		});
 	});

@@ -65,7 +65,7 @@ describe('AuthController', () => {
 			authService.signIn.mockResolvedValueOnce(mockResponse);
 
 			await controller.signIn(mockCredentials, mockExpressResponse);
-			
+
 			expect(authService.signIn).toHaveBeenCalledWith(mockCredentials);
 			expect(sendResponse).toHaveBeenCalledWith(
 				mockExpressResponse,

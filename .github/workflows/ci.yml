@@ -1,0 +1,42 @@
+name: Twobridge pipeline
+
+# Trigger the workflow on push or pull-requests to the main branch
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository code
+      - name: Checkout repository
+        uses: actions/checkout@v4  # Use the latest checkout action
+
+      # Set up Node.js
+      - name: Set up Node.js v21.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: '21.x'
+          cache: 'npm'  # Cache npm dependencies to speed up builds
+
+      # Install dependencies using npm ci for faster and more reliable installs
+      - name: Install dependencies
+        run: npm ci
+
+      # Build the project
+      - name: Build project
+        run: npm run nest build
+
+      # Run the tests with Jest
+      - name: Run tests
+        run: npm run jest
+
+      # Run tests with code coverage
+      - name: Run tests with coverage
+        run: npm run test:cov

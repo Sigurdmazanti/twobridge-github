@@ -18,7 +18,7 @@ export async function getShopifyCustomerIdByToken(
 			}
 		}`;
 
-		const splitToken = splitBearerToken(authHeader as any);
+		const splitToken = splitBearerToken(authHeader.authorization);
 
 		const response = await firstValueFrom(
 			httpService.post(

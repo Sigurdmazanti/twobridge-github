@@ -28,7 +28,7 @@ export class UmbracoOrdersStrategy implements OrdersStrategy {
 		queryParams: GetUserOrdersQueryParamsDto = {},
 	): Promise<GetUserOrdersResponseDto> {
 		try {
-			const customerReference = splitBearerToken(authHeader as any);
+			const customerReference = splitBearerToken(authHeader.authorization);
 
 			const response = await firstValueFrom(
 				this.httpService.get(

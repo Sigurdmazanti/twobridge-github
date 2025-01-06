@@ -27,7 +27,7 @@ export class ShopifyUserInfoStrategy implements UserInfoStrategy {
 		authHeader: AuthHeadersDto,
 	): Promise<GetUserInfoResponseDto> {
 		try {
-			const token = splitBearerToken(authHeader as any);
+			const token = splitBearerToken(authHeader.authorization);
 
 			const query = `query getUserInfo($customerAccessToken: String!) {
                 customer(customerAccessToken: $customerAccessToken) {
@@ -85,7 +85,7 @@ export class ShopifyUserInfoStrategy implements UserInfoStrategy {
 		userInfo: UpdateUserInfoDto,
 	): Promise<GetUserInfoResponseDto> {
 		try {
-			const token = splitBearerToken(authHeader as any);
+			const token = splitBearerToken(authHeader.authorization);
 
 			const query = `mutation customerUpdate($customer: CustomerUpdateInput!, $customerAccessToken: String!) {
                 customerUpdate(customer: $customer, customerAccessToken: $customerAccessToken) {

@@ -27,7 +27,7 @@ export class ShopifyCredentialsStrategy implements CredentialsStrategy {
 				authHeader,
 				this.httpService,
 			);
-			const token = splitBearerToken(authHeader as any);
+			const token = splitBearerToken(authHeader.authorization);
 
 			const query = `mutation customerReset($id: ID!, $input: CustomerResetInput!) {
                 customerReset(id: $id, input: $input) {

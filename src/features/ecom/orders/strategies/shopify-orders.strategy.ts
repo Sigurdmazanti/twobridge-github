@@ -1,6 +1,5 @@
 import { HttpService } from '@nestjs/axios';
 import { firstValueFrom } from 'rxjs';
-import { plainToClass } from 'class-transformer';
 import {
 	handleError,
 	handleResponse,
@@ -8,7 +7,6 @@ import {
 } from 'src/common/helpers/utils/return-utils';
 import { AuthHeadersDto } from 'src/common/dto/headers-auth.dto';
 import {
-	createAuthHeaders,
 	splitBearerToken,
 } from 'src/common/helpers/utils/headers-utils';
 import { OrdersStrategy } from '../interfaces/orders-strategy.interface';
@@ -17,7 +15,6 @@ import {
 	GetUserOrdersResponseDto,
 } from '../dto/get-user-orders.dto';
 import {
-	mapDynamicwebGetUserOrdersQueryParams,
 	mapShopifyGetUserOrdersQueryParams,
 	mapShopifyGetUserOrdersResponse,
 } from '../mapping/get-user-orders.mapper';
@@ -31,7 +28,9 @@ export class ShopifyOrdersStrategy implements OrdersStrategy {
 		queryParams: GetUserOrdersQueryParamsDto = {},
 	): Promise<GetUserOrdersResponseDto> {
 		try {
-			const token = splitBearerToken(authHeader as any);
+			const token = splitBearerToken(authHeader.authorization);
+            console.log(authHeader.authorization);
+            
 			const mappedQueryParams =
 				mapShopifyGetUserOrdersQueryParams(queryParams);
 

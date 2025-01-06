@@ -29,7 +29,7 @@ export function splitBearerToken(
 	const aHeader =
 		typeof authHeader === 'string' ? authHeader : authHeader.authorization;
 	const parts = aHeader.split(' ');
-
+	
 	if (parts.length === 2) {
 		const scheme = parts[0];
 		const credentials = parts[1];

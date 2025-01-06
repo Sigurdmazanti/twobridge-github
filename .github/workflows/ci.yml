@@ -60,7 +60,7 @@ jobs:
       # Run tests with code coverage
       - name: Run tests with coverage
         run: npx jest --coverage
-        
+
   deploy:
     runs-on: ubuntu-latest
     needs: test  # Ensure deployment runs only after tests are successful
@@ -69,15 +69,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Set up Heroku CLI
-      - name: Set up Heroku CLI
-        uses: akshnz/heroku-action@v2
-        with:
-          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-          heroku_app_name: twobridge
-
       # Deploy to Heroku
       - name: Deploy to Heroku
-        run: |
-          git remote add heroku https://git.heroku.com/twobridge.git
-          git push heroku master
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: "twobridge"  # Updated app name
+          heroku_email: "sigmn@live.dk"  # Replace with your Heroku account email

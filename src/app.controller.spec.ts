@@ -12,10 +12,10 @@ describe('AppController', () => {
       providers: [AppService],
     }).compile();
 
-    controller = app.get<AppController>(AppController); // Initialize the controller here
+    controller = app.get<AppController>(AppController);
   });
 
   it('should be defined', () => {
-    expect(controller).toBeDefined(); // Check if controller is defined
+    expect(controller).toBeDefined();
   });
 });

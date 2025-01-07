@@ -39,7 +39,7 @@ export class CredentialsController {
 	})
 	@Patch('changePassword')
 	async changePassword(
-		@Headers() authHeader: AuthHeadersDto,
+		@Headers('authorization') authHeader: AuthHeadersDto,
 		@Body() resetPassword: ChangePasswordRequestDto,
 		@Res() res: Response,
 	) {

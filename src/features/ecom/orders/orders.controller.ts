@@ -61,7 +61,7 @@ export class OrdersController {
 		type: GetUserOrdersResponseDto,
 	})
 	async getUserOrders(
-		@Headers() authHeader: AuthHeadersDto,
+		@Headers('authorization') authHeader: AuthHeadersDto,
 		@Query() queryParams: GetUserOrdersQueryParamsDto,
 		@Res() res: Response,
 	) {

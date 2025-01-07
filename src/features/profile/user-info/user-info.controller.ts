@@ -38,7 +38,7 @@ export class UserInfoController {
 		type: GetUserInfoResponseDto,
 	})
 	async getUserInfo(
-		@Headers() authHeader: AuthHeadersDto,
+		@Headers('authorization') authHeader: AuthHeadersDto,
 		@Res() res: Response,
 	) {
 		try {
@@ -66,7 +66,7 @@ export class UserInfoController {
 		type: GetUserInfoResponseDto,
 	})
 	async updateUserInfo(
-		@Headers() authHeader: AuthHeadersDto,
+		@Headers('authorization') authHeader: AuthHeadersDto,
 		@Body() userInfo: UpdateUserInfoDto,
 		@Res() res: Response,
 	) {

@@ -57,7 +57,7 @@ export class AuthController {
 		type: RefreshTokenResponseDto,
 	})
 	async refreshToken(
-		@Headers('authorization') authHeader: AuthHeadersDto,
+		@Headers('authorization') authHeader: string,
 		@Res() res: Response,
 	) {
 		try {

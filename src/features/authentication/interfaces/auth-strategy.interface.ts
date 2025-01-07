@@ -9,6 +9,6 @@ export interface AuthStrategy {
 		credentials: SignInRequestDto,
 	): Promise<ApiResponseDto<SignInResponseDto>>;
 	refreshToken(
-		authHeader: AuthHeadersDto,
+		authHeader: string,
 	): Promise<ApiResponseDto<RefreshTokenResponseDto>>;
 }

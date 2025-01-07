@@ -35,10 +35,10 @@ export class DynamicwebAuthStrategy implements AuthStrategy {
 	}
 
 	async refreshToken(
-		authHeader: AuthHeadersDto,
+		authHeader: string,
 	): Promise<ApiResponseDto<RefreshTokenResponseDto>> {
 		try {
-			const refreshHeaders = createAuthHeaders(authHeader.authorization);
+			const refreshHeaders = createAuthHeaders(authHeader);
 
 			const response = await firstValueFrom(
 				this.httpService.get(

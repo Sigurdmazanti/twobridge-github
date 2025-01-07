@@ -79,10 +79,10 @@ export class ShopifyAuthStrategy implements AuthStrategy {
 	}
 
 	async refreshToken(
-		authHeader: AuthHeadersDto,
+		authHeader: string,
 	): Promise<ApiResponseDto<RefreshTokenResponseDto>> {
 		try {
-			const token = splitBearerToken(authHeader.authorization);
+			const token = splitBearerToken(authHeader);
 
 			const query = `mutation SignInWithAccessToken(
                 $customerAccessToken: String!

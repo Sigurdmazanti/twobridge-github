@@ -32,7 +32,7 @@ export class AuthService {
 		return this.strategy.signIn(credentials);
 	}
 
-	refreshToken(authHeader: AuthHeadersDto) {
+	refreshToken(authHeader: string) {
 		return this.strategy.refreshToken(authHeader);
 	}
 }

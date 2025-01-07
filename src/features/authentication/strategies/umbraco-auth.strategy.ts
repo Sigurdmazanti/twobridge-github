@@ -37,10 +37,10 @@ export class UmbracoAuthStrategy implements AuthStrategy {
 	}
 
 	async refreshToken(
-		authHeader: AuthHeadersDto,
+		authHeader: string,
 	): Promise<ApiResponseDto<RefreshTokenResponseDto>> {
 		try {
-			const refreshHeaders = createAuthHeaders(authHeader.authorization);
+			const refreshHeaders = createAuthHeaders(authHeader);
 			refreshHeaders['Api-Key'] = process.env.UMBRACO_API_KEY;
 
 			const response = await firstValueFrom(

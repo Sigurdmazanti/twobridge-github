@@ -29,7 +29,6 @@ export class ShopifyOrdersStrategy implements OrdersStrategy {
 	): Promise<GetUserOrdersResponseDto> {
 		try {
 			const token = splitBearerToken(authHeader.authorization);
-            console.log(authHeader.authorization);
             
 			const mappedQueryParams =
 				mapShopifyGetUserOrdersQueryParams(queryParams);

@@ -61,6 +61,8 @@ export class AuthController {
 		@Res() res: Response,
 	) {
 		try {
+			console.log(authHeader);
+			
 			const response = await this.authService.refreshToken(authHeader);
 
 			sendResponse(res, response);

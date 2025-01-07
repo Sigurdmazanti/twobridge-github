@@ -24,12 +24,13 @@ export function createAuthHeaders(authHeader?: string): {} {
 }
 
 export function splitBearerToken(
-	authHeader: { authorization: string } | string,
+	authHeader: string,
 ): string | null {
-	const aHeader =
-		typeof authHeader === 'string' ? authHeader : authHeader.authorization;
+	// const aHeader =
+	// 	typeof authHeader === 'string' ? authHeader : authHeader.authorization;
+	const aHeader = authHeader;
 	const parts = aHeader.split(' ');
-	
+
 	if (parts.length === 2) {
 		const scheme = parts[0];
 		const credentials = parts[1];

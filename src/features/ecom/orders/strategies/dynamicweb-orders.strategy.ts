@@ -32,8 +32,6 @@ export class DynamicwebOrdersStrategy implements OrdersStrategy {
 				mappedQueryParams as any,
 			).toString();
 
-			console.log(refreshHeaders);
-
 			const response = await firstValueFrom(
 				this.httpService.get(
 					`${process.env.DYNAMICWEB_API_URL}/dwapi/ecommerce/orders?${queryString}`,

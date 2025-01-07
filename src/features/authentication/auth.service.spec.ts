@@ -76,9 +76,7 @@ describe('AuthService', () => {
 	});
 
 	it('should call refreshToken on the strategy', async () => {
-		const mockAuthHeader: AuthHeadersDto = {
-			authorization: 'Bearer current-token',
-		};
+		const mockAuthHeader = 'Bearer current-token';
 
 		const mockResponse: RefreshTokenResponseDto = {
 			token: 'new-token',

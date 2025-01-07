@@ -89,9 +89,7 @@ describe('AuthController', () => {
 
 	describe('refreshToken', () => {
 		it('should call AuthService.refreshToken and return the correct response', async () => {
-			const mockAuthHeader: AuthHeadersDto = {
-				authorization: 'Bearer current-token',
-			};
+			const mockAuthHeader = 'Bearer current-token';
 
 			const mockResponse: RefreshTokenResponseDto = {
 				token: 'new-token',
@@ -111,14 +109,12 @@ describe('AuthController', () => {
 		});
 
 		it('should throw an exception if AuthService.refreshToken fails', async () => {
-			const mockData: AuthHeadersDto = {
-				authorization: 'Bearer token',
-			};
+			const mockAuthHeader = 'Bearer current-token';
 
 			authService.refreshToken.mockRejectedValueOnce(axiosError);
 
 			await expect(
-				controller.refreshToken(mockData, mockExpressResponse),
+				controller.refreshToken(mockAuthHeader, mockExpressResponse),
 			).rejects.toThrow(new HttpException('Not Found', 404));
 		});
 	});

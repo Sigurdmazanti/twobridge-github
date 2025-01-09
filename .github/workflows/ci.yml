@@ -74,5 +74,5 @@ jobs:
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-          heroku_app_name: "twobridge"  # Updated app name
-          heroku_email: "sigmn@live.dk"  # Replace with your Heroku account email
+          heroku_app_name: "twobridge"
+          heroku_email: "sigmn@live.dk"

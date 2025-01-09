@@ -3,9 +3,7 @@ import { Controller } from '@nestjs/common';
 import { Response } from 'express';
 import { AuthService } from './auth.service';
 import { SignInRequestDto, SignInResponseDto } from './dto/sign-in.dto';
-import {
-	sendResponse,
-} from 'src/common/helpers/utils/return-utils';
+import { sendResponse } from 'src/common/helpers/utils/return-utils';
 import {
 	ApiBody,
 	ApiHeader,
@@ -29,10 +27,7 @@ export class AuthController {
 		description: 'Successful sign-in response.',
 		type: SignInResponseDto,
 	})
-	async signIn(
-		@Body() credentials: SignInRequestDto,
-		@Res() res: Response
-	) {
+	async signIn(@Body() credentials: SignInRequestDto, @Res() res: Response) {
 		try {
 			const response = await this.authService.signIn(credentials);
 
@@ -70,5 +65,3 @@ export class AuthController {
 		}
 	}
 }
-
-//TODO: HANDLE ERROR

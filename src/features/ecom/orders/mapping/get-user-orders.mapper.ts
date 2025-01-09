@@ -83,7 +83,8 @@ export const mapShopifyGetUserOrdersResponse = (
 		r.totalOrdersCount = !isNaN(Number(o.totalCount))
 			? Number(o.totalCount)
 			: 0;
-	if (o.pageInfo?.endCursor !== undefined) r.afterCursor = o.pageInfo.endCursor;
+	if (o.pageInfo?.endCursor !== undefined)
+		r.afterCursor = o.pageInfo.endCursor;
 
 	r.orders = oEdges.map((order: any) => mapShopifyOrder(order.node, cInfo));
 

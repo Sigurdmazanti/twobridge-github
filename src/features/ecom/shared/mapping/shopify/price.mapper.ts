@@ -1,12 +1,8 @@
 import { PriceDto } from '../../dto/price.dto';
 
-export function mapShopifyPrice(
-	discountedPrice: any,
-	originalPrice?: any,
-): PriceDto {
+export function mapShopifyPrice(discountedPrice: any): PriceDto {
 	const mp: PriceDto = {};
 	const dp = discountedPrice;
-	const op = originalPrice;
 
 	if (dp.amount !== undefined) mp.price = Number(dp.amount);
 	if (dp.currencyCode !== undefined) mp.currencyCode = dp.currencyCode;

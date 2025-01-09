@@ -36,7 +36,7 @@ export function sendResponse(res: Response, response: any) {
  *
  * @throws {HttpException} Throws an `HttpException` with the appropriate status code and error message.
  */
-export function handleError<T = any>(error: any): ApiErrorResponseDto {
+export function handleError(error: any): ApiErrorResponseDto {
 	const statusCode =
 		error.response?.status ||
 		error.status ||

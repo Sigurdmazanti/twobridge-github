@@ -83,7 +83,7 @@ describe('CredentialsController', () => {
 
 		it('should throw an exception if CredentialsService.changePassword', async () => {
 			const mockAuthHeader = 'Invalid token';
-			
+
 			const mockNewPassword: ChangePasswordRequestDto = {
 				password: faker.internet.password(),
 			};

@@ -12,9 +12,7 @@ import { UpdateUserInfoDto } from '../dto/update-user-info.dto';
 export class UmbracoUserInfoStrategy implements UserInfoStrategy {
 	constructor(private readonly httpService: HttpService) {}
 
-	async getUserInfo(
-		authHeader: string,
-	): Promise<GetUserInfoResponseDto> {
+	async getUserInfo(authHeader: string): Promise<GetUserInfoResponseDto> {
 		try {
 			const refreshHeaders = createAuthHeaders(authHeader);
 			refreshHeaders['Api-Key'] = process.env.UMBRACO_API_KEY;

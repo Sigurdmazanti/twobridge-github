@@ -14,9 +14,7 @@ import { mapDynamicwebUpdateUserInfo } from '../mapping/update-user-info-mapper'
 export class DynamicwebUserInfoStrategy implements UserInfoStrategy {
 	constructor(private readonly httpService: HttpService) {}
 
-	async getUserInfo(
-		authHeader: string,
-	): Promise<GetUserInfoResponseDto> {
+	async getUserInfo(authHeader: string): Promise<GetUserInfoResponseDto> {
 		try {
 			const refreshHeaders = createAuthHeaders(authHeader);
 

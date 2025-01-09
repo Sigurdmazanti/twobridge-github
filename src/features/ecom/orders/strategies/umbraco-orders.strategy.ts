@@ -4,17 +4,13 @@ import {
 	handleError,
 	handleResponse,
 } from 'src/common/helpers/utils/return-utils';
-import {
-	splitBearerToken,
-} from 'src/common/helpers/utils/headers-utils';
+import { splitBearerToken } from 'src/common/helpers/utils/headers-utils';
 import { OrdersStrategy } from '../interfaces/orders-strategy.interface';
 import {
 	GetUserOrdersQueryParamsDto,
 	GetUserOrdersResponseDto,
 } from '../dto/get-user-orders.dto';
-import {
-	mapUmbracoGetUserOrdersResponse,
-} from '../mapping/get-user-orders.mapper';
+import { mapUmbracoGetUserOrdersResponse } from '../mapping/get-user-orders.mapper';
 
 export class UmbracoOrdersStrategy implements OrdersStrategy {
 	constructor(private readonly httpService: HttpService) {}
@@ -24,9 +20,7 @@ export class UmbracoOrdersStrategy implements OrdersStrategy {
 		queryParams: GetUserOrdersQueryParamsDto = {},
 	): Promise<GetUserOrdersResponseDto> {
 		try {
-			const customerReference = splitBearerToken(
-				authHeader,
-			);
+			const customerReference = splitBearerToken(authHeader);
 
 			const response = await firstValueFrom(
 				this.httpService.get(
@@ -50,7 +44,3 @@ export class UmbracoOrdersStrategy implements OrdersStrategy {
 		}
 	}
 }
-
-//TODO: RUN TESTS
-//TODO: CREATE API DOCUMENTATION ON SWAGGER
-//TODO: IF EXTRA TIME, CREATE MORE TESTS FOR MAPPERS

@@ -1,6 +1,5 @@
 import { Response } from 'express';
 import { HttpStatus } from '@nestjs/common';
-import { AxiosResponse } from 'axios';
 import {
 	sendResponse,
 	handleError,

@@ -17,8 +17,10 @@ export function mapUmbracoShippingMethod(
 	if (shippingMethod.freeFeeAmount !== undefined)
 		msp.freeFeeAmount = shippingMethod.freeFeeAmount;
 	if (shippingMethod.code !== undefined) msp.code = shippingMethod.code;
-	if (shippingMethod.agentCode !== undefined) msp.agentCode = shippingMethod.agentCode;
-	if (shippingMethod.agentName !== undefined) msp.agentName = shippingMethod.agentName;
+	if (shippingMethod.agentCode !== undefined)
+		msp.agentCode = shippingMethod.agentCode;
+	if (shippingMethod.agentName !== undefined)
+		msp.agentName = shippingMethod.agentName;
 	if (shippingMethod.agentServiceCode !== undefined)
 		msp.agentServiceCode = shippingMethod.agentServiceCode;
 	if (shippingMethod.agentServiceDescription !== undefined)

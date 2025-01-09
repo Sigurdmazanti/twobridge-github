@@ -15,7 +15,7 @@ import {
 } from 'src/common/helpers/transform-helper';
 import { ApiResponseDto } from 'src/common/dto/api-response.dto';
 import { OrderDto } from './order.dto';
-import { ApiParam, ApiProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class GetUserOrdersQueryParamsDto {
 	@IsOptional()

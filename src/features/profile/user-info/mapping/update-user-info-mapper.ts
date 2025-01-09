@@ -47,7 +47,8 @@ export const mapShopifyUpdateUserInfoRequest = (
 	if (req.city !== undefined) defaultAddress.city = req.city;
 	if (req.zip !== undefined) defaultAddress.zip = req.zip;
 	if (req.country !== undefined) defaultAddress.country = req.country;
-	if (req.countryCode !== undefined) defaultAddress.countryCodeV2 = req.countryCode;
+	if (req.countryCode !== undefined)
+		defaultAddress.countryCodeV2 = req.countryCode;
 
 	return r;
 };

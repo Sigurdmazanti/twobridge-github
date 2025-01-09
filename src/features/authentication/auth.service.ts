@@ -20,10 +20,8 @@ export class AuthService {
 			{
 				dynamicweb: (httpService) =>
 					new DynamicwebAuthStrategy(httpService),
-				umbraco: (httpService) => 
-					new UmbracoAuthStrategy(httpService),
-				shopify: (httpService) => 
-					new ShopifyAuthStrategy(httpService),
+				umbraco: (httpService) => new UmbracoAuthStrategy(httpService),
+				shopify: (httpService) => new ShopifyAuthStrategy(httpService),
 			},
 			httpService,
 		);

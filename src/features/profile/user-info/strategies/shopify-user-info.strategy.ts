@@ -8,23 +8,15 @@ import {
 import { UserInfoStrategy } from '../interfaces/user-info-strategy.interface';
 import { GetUserInfoResponseDto } from '../dto/get-user-info-response.dto';
 import { mapShopifyGetUserInfo } from '../mapping/get-user-info.mapper';
-import {
-	createAuthHeaders,
-	splitBearerToken,
-} from 'src/common/helpers/utils/headers-utils';
+import { splitBearerToken } from 'src/common/helpers/utils/headers-utils';
 import { UpdateUserInfoDto } from '../dto/update-user-info.dto';
-import {
-	mapDynamicwebUpdateUserInfo,
-	mapShopifyUpdateUserInfoRequest,
-} from '../mapping/update-user-info-mapper';
+import { mapShopifyUpdateUserInfoRequest } from '../mapping/update-user-info-mapper';
 import { detectShopifyErrors } from 'src/common/helpers/shopify/utils/get-error-code-util';
 
 export class ShopifyUserInfoStrategy implements UserInfoStrategy {
 	constructor(private readonly httpService: HttpService) {}
 
-	async getUserInfo(
-		authHeader: string,
-	): Promise<GetUserInfoResponseDto> {
+	async getUserInfo(authHeader: string): Promise<GetUserInfoResponseDto> {
 		try {
 			const token = splitBearerToken(authHeader);
 

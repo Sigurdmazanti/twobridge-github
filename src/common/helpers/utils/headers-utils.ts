@@ -10,8 +10,8 @@
  * @returns A `Record<string, string>` representing the headers,
  *          containing the "authorization" key if the token is provided.
  */
-export function createAuthHeaders(authHeader?: string): {} {
-	const refreshHeaders: any = {};
+export function createAuthHeaders(authHeader?: string): Record<string, string> {
+	const refreshHeaders: Record<string, string> = {};
 
 	if (authHeader) {
 		refreshHeaders['authorization'] = authHeader;
@@ -26,18 +26,18 @@ export function createAuthHeaders(authHeader?: string): {} {
  *
  * @param {string} authHeader - The authorization header containing the Bearer token.
  * @returns {string | null} The extracted Bearer token if valid, or `null` if the header is invalid.
- * 
+ *
  */
 export function splitBearerToken(authHeader: string): string | null {
-    const parts = authHeader.split(' ');
+	const parts = authHeader.split(' ');
 
-    if (parts.length === 2) {
-        const [scheme, credentials] = parts;
+	if (parts.length === 2) {
+		const [scheme, credentials] = parts;
 
-        if (/^Bearer$/i.test(scheme)) {
-            return credentials;
-        }
-    }
+		if (/^Bearer$/i.test(scheme)) {
+			return credentials;
+		}
+	}
 
-    return null;
+	return null;
 }

@@ -1,7 +1,7 @@
 import { Expose } from 'class-transformer';
 import { IsString, IsInt, IsOptional } from 'class-validator';
 
-export class ApiResponseDto<T = any> {
+export class ApiResponseDto {
 	@IsInt()
 	@IsOptional()
 	@Expose()

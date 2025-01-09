@@ -1,4 +1,4 @@
-import { IsString, IsOptional } from 'class-validator';
+import { IsString } from 'class-validator';
 import { Expose } from 'class-transformer';
 import { ApiResponseDto } from 'src/common/dto/api-response.dto';
 import { ApiProperty } from '@nestjs/swagger';

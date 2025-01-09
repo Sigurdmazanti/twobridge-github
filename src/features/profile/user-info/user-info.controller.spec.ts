@@ -84,7 +84,7 @@ describe('UserInfoController', () => {
 
 	describe('updateUserInfo', () => {
 		it('should call UserInfoService.updateUserInfo with the correct credentials and return appropiate data', async () => {
-			const mockAuthHeader ='Bearer token';
+			const mockAuthHeader = 'Bearer token';
 
 			const mockUpdatedUserInfo: UpdateUserInfoDto = {
 				firstName: faker.person.firstName(),

@@ -11,12 +11,10 @@ describe('Headers utility functions', () => {
 			const mockAuthHeader = 'Bearer current-token';
 
 			const mockResponse: AuthHeadersDto = {
-				authorization: mockAuthHeader
-			}
+				authorization: mockAuthHeader,
+			};
 
-			expect(createAuthHeaders(mockAuthHeader)).toEqual(
-				mockResponse
-			);
+			expect(createAuthHeaders(mockAuthHeader)).toEqual(mockResponse);
 		});
 
 		it('should return the correct authorization header with the token', () => {

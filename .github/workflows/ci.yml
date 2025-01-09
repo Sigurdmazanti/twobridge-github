@@ -37,6 +37,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # Run linting before the build
+      - name: Run lint
+        run: npm run lint
+
       # Build the project
       - name: Build project
         run: npx nest build

@@ -1,7 +1,7 @@
 import { Expose } from 'class-transformer';
 import { IsString, IsInt } from 'class-validator';
 
-export class ApiErrorResponseDto<T = any> {
+export class ApiErrorResponseDto {
 	@IsInt()
 	@Expose()
 	statusCode: number = 500;

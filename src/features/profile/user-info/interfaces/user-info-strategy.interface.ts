@@ -1,12 +1,11 @@
-import { AuthHeadersDto } from 'src/common/dto/headers-auth.dto';
 import { GetUserInfoResponseDto } from '../dto/get-user-info-response.dto';
 import { UpdateUserInfoDto } from '../dto/update-user-info.dto';
 
 export interface UserInfoStrategy {
-	getUserInfo(authHeader: AuthHeadersDto): Promise<GetUserInfoResponseDto>;
+	getUserInfo(authHeader: string): Promise<GetUserInfoResponseDto>;
 
 	updateUserInfo(
-		authHeader: AuthHeadersDto,
+		authHeader: string,
 		userInfo: UpdateUserInfoDto,
 	): Promise<GetUserInfoResponseDto>;
 }

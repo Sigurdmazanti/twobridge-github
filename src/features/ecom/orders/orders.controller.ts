@@ -8,7 +8,6 @@ import {
 } from '@nestjs/common';
 import { Response } from 'express';
 import { OrdersService } from './orders.service';
-import { AuthHeadersDto } from 'src/common/dto/headers-auth.dto';
 import { sendResponse } from 'src/common/helpers/utils/return-utils';
 import {
 	GetUserOrdersQueryParamsDto,
@@ -18,7 +17,6 @@ import {
 	ApiHeader,
 	ApiOkResponse,
 	ApiOperation,
-	ApiParam,
 	ApiQuery,
 } from '@nestjs/swagger';
 
@@ -61,7 +59,7 @@ export class OrdersController {
 		type: GetUserOrdersResponseDto,
 	})
 	async getUserOrders(
-		@Headers('authorization') authHeader: AuthHeadersDto,
+		@Headers('authorization') authHeader: string,
 		@Query() queryParams: GetUserOrdersQueryParamsDto,
 		@Res() res: Response,
 	) {

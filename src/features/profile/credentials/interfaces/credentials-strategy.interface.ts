@@ -1,4 +1,3 @@
-import { AuthHeadersDto } from 'src/common/dto/headers-auth.dto';
 import {
 	ChangePasswordRequestDto,
 	ChangePasswordResponseDto,
@@ -6,7 +5,7 @@ import {
 
 export interface CredentialsStrategy {
 	changePassword(
-		authHeader: AuthHeadersDto,
+		authHeader: string,
 		resetPassword: ChangePasswordRequestDto,
 	): Promise<ChangePasswordResponseDto>;
 }

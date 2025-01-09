@@ -3,7 +3,6 @@ import { UserInfoService } from './user-info.service';
 import { HttpService } from '@nestjs/axios';
 import * as strategyHelper from 'src/common/helpers/strategy-helper';
 import { DynamicwebUserInfoStrategy } from './strategies/dynamicweb-user-info.strategy';
-import { AuthHeadersDto } from 'src/common/dto/headers-auth.dto';
 import { GetUserInfoResponseDto } from './dto/get-user-info-response.dto';
 import { faker } from '@faker-js/faker/.';
 import { UpdateUserInfoDto } from './dto/update-user-info.dto';
@@ -52,9 +51,7 @@ describe('UserInfoService', () => {
 	});
 
 	it('should call getUserInfo on the strategy', async () => {
-		const mockAuthHeader: AuthHeadersDto = {
-			authorization: 'Bearer token',
-		};
+		const mockAuthHeader = 'Bearer token';
 
 		const mockResponse: GetUserInfoResponseDto = {
 			firstName: faker.person.firstName(),
@@ -72,9 +69,7 @@ describe('UserInfoService', () => {
 	});
 
 	it('should call updateUserInfo on the strategy', async () => {
-		const mockAuthHeader: AuthHeadersDto = {
-			authorization: 'Bearer token',
-		};
+		const mockAuthHeader = 'Bearer token';
 
 		const mockUpdatedUserInfo: UpdateUserInfoDto = {
 			firstName: faker.person.firstName(),

@@ -3,7 +3,6 @@ import { OrdersService } from './orders.service';
 import { HttpService } from '@nestjs/axios';
 import * as strategyHelper from 'src/common/helpers/strategy-helper';
 import { DynamicwebOrdersStrategy } from './strategies/dynamicweb-orders.strategy';
-import { AuthHeadersDto } from 'src/common/dto/headers-auth.dto';
 import {
 	GetUserOrdersQueryParamsDto,
 	GetUserOrdersResponseDto,
@@ -59,9 +58,7 @@ describe('OrdersService', () => {
 	});
 
 	it('should call getUserOrders on the strategy', async () => {
-		const mockAuthHeader: AuthHeadersDto = {
-			authorization: 'Bearer current-token',
-		};
+		const mockAuthHeader = 'Bearer current-token';
 
 		const mockQueryParams: GetUserOrdersQueryParamsDto = {
 			pageSize: 5,

@@ -1,6 +1,5 @@
 import { getShopifyCustomerIdByToken } from './get-customer-info-util';
 import { HttpService } from '@nestjs/axios';
-import { AuthHeadersDto } from 'src/common/dto/headers-auth.dto';
 import { of, throwError } from 'rxjs';
 import { Test, TestingModule } from '@nestjs/testing';
 import { handleError } from '../../utils/return-utils';
@@ -33,9 +32,7 @@ describe('getShopifyCustomerIdByToken', () => {
 	});
 
 	it('should return customer ID on successful API call', async () => {
-		const authHeader: AuthHeadersDto = {
-			authorization: 'Bearer tokenXYZ',
-		};
+		const authHeader = 'Bearer tokenXYZ';
 
 		const mirroredAxiosSuccess = axiosSuccess;
 		mirroredAxiosSuccess.data = {
@@ -74,22 +71,15 @@ describe('getShopifyCustomerIdByToken', () => {
 	});
 
 	it('should call handleError on API error', async () => {
-		const authHeader: AuthHeadersDto = {
-			authorization: 'Bearer some-invalid-token',
-		};
+		const authHeader = 'Bearer tokenXYZ';
 
-		// Create the error inside a factory function to avoid the deprecation
 		const mockError = new Error('API Error');
-
-		// Mock the post method to throw an error using throwError with a factory function
 		jest.spyOn(httpService, 'post').mockImplementation(() =>
 			throwError(() => mockError),
 		);
 
-		// Execute the function that calls the mocked service
 		await getShopifyCustomerIdByToken(authHeader, httpService);
 
-		// Check if the handleError function was called with the mock error
 		expect(handleError).toHaveBeenCalledWith(mockError);
 	});
 });

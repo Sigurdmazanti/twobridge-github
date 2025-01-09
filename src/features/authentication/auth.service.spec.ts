@@ -5,7 +5,6 @@ import { AuthService } from './auth.service';
 import { SignInRequestDto, SignInResponseDto } from './dto/sign-in.dto';
 import * as strategyHelper from 'src/common/helpers/strategy-helper';
 import { DynamicwebAuthStrategy } from './strategies/dynamicweb-auth.strategy';
-import { AuthHeadersDto } from 'src/common/dto/headers-auth.dto';
 import { RefreshTokenResponseDto } from './dto/refresh-token.dto';
 
 describe('AuthService', () => {

@@ -4,7 +4,6 @@ import { getStrategyBasedOnConfig } from 'src/common/helpers/strategy-helper';
 import { CredentialsStrategy } from './interfaces/credentials-strategy.interface';
 import { DynamicwebCredentialsStrategy } from './strategies/dynamicweb-credentials.strategy';
 import { ChangePasswordRequestDto } from './dto/change-password.dto';
-import { AuthHeadersDto } from 'src/common/dto/headers-auth.dto';
 import { ShopifyCredentialsStrategy } from './strategies/shopify-credentials.strategy';
 import { UmbracoCredentialsStrategy } from './strategies/umbraco-credentials.strategy';
 
@@ -31,7 +30,7 @@ export class CredentialsService {
 	}
 
 	changePassword(
-		authHeader: AuthHeadersDto,
+		authHeader: string,
 		resetPassword: ChangePasswordRequestDto,
 	) {
 		return this.strategy.changePassword(authHeader, resetPassword);

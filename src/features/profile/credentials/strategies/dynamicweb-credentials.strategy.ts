@@ -1,7 +1,6 @@
 import { HttpService } from '@nestjs/axios';
 import { firstValueFrom } from 'rxjs';
 import { CredentialsStrategy } from '../interfaces/credentials-strategy.interface';
-import { AuthHeadersDto } from 'src/common/dto/headers-auth.dto';
 import {
 	handleError,
 	handleResponse,
@@ -16,11 +15,11 @@ export class DynamicwebCredentialsStrategy implements CredentialsStrategy {
 	constructor(private readonly httpService: HttpService) {}
 
 	async changePassword(
-		authHeader: AuthHeadersDto,
+		authHeader: string,
 		resetPassword: ChangePasswordRequestDto,
 	): Promise<ChangePasswordResponseDto> {
 		try {
-			const refreshHeaders = createAuthHeaders(authHeader.authorization);
+			const refreshHeaders = createAuthHeaders(authHeader);
 
 			const response = await firstValueFrom(
 				this.httpService.patch(

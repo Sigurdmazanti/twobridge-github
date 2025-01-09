@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { UserInfoStrategy } from './interfaces/user-info-strategy.interface';
-import { AuthHeadersDto } from 'src/common/dto/headers-auth.dto';
 import { HttpService } from '@nestjs/axios';
 import { getStrategyBasedOnConfig } from 'src/common/helpers/strategy-helper';
 import { DynamicwebUserInfoStrategy } from './strategies/dynamicweb-user-info.strategy';
@@ -30,11 +29,11 @@ export class UserInfoService {
 		);
 	}
 
-	getUserInfo(authHeader: AuthHeadersDto) {
+	getUserInfo(authHeader: string) {
 		return this.strategy.getUserInfo(authHeader);
 	}
 
-	updateUserInfo(authHeader: AuthHeadersDto, userInfo: UpdateUserInfoDto) {
+	updateUserInfo(authHeader: string, userInfo: UpdateUserInfoDto) {
 		return this.strategy.updateUserInfo(authHeader, userInfo);
 	}
 }

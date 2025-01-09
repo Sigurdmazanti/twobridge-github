@@ -7,7 +7,6 @@ import {
 	handleError,
 	handleResponse,
 } from 'src/common/helpers/utils/return-utils';
-import { AuthHeadersDto } from 'src/common/dto/headers-auth.dto';
 import { createAuthHeaders } from 'src/common/helpers/utils/headers-utils';
 import { mapDynamicwebSignInResponse } from '../mapping/sign-in.mapper';
 import { mapDynamicwebRefreshTokenResponse } from '../mapping/refresh-token.mapper';

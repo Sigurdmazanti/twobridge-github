@@ -5,7 +5,6 @@ import { OrdersService } from './orders.service';
 import { BadRequestException, HttpException } from '@nestjs/common';
 import { sendResponse } from 'src/common/helpers/utils/return-utils';
 import { Response } from 'express';
-import { AuthHeadersDto } from 'src/common/dto/headers-auth.dto';
 import { testDtoValidation } from 'src/common/helpers/test-helper';
 import { axiosError } from 'src/common/helpers/axios-object-helper';
 import {
@@ -56,9 +55,7 @@ describe('OrdersController', () => {
 
 	describe('getUserOrders', () => {
 		it('should call OrdersService.getUserOrders with the correct token and parameters and return appropiate data', async () => {
-			const mockAuthHeader: AuthHeadersDto = {
-				authorization: 'Bearer current-token',
-			};
+			const mockAuthHeader = 'Bearer current-token';
 
 			const mockQueryParams: GetUserOrdersQueryParamsDto = {
 				pageSize: 5,
@@ -96,9 +93,7 @@ describe('OrdersController', () => {
 		});
 
 		it('should throw an exception if OrdersService.getUserOrders fails', async () => {
-			const mockAuthHeader: AuthHeadersDto = {
-				authorization: 'Invalid token',
-			};
+			const mockAuthHeader = 'invalid token';
 
 			const mockQueryParams: GetUserOrdersQueryParamsDto = {
 				pageSize: 5,

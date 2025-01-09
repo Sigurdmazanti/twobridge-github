@@ -1,7 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CredentialsController } from './credentials.controller';
 import { CredentialsService } from './credentials.service';
-import { AuthHeadersDto } from 'src/common/dto/headers-auth.dto';
 import { faker } from '@faker-js/faker/.';
 import { Response } from 'express';
 import {
@@ -53,9 +52,7 @@ describe('CredentialsController', () => {
 
 	describe('changePassword', () => {
 		it('should call CredentialsService.changePassword with the correct token', async () => {
-			const mockAuthHeader: AuthHeadersDto = {
-				authorization: 'Bearer current-token',
-			};
+			const mockAuthHeader = 'Bearer current-token';
 
 			const mockResponse: ChangePasswordResponseDto = {
 				message: 'Password changed successfully',
@@ -85,10 +82,8 @@ describe('CredentialsController', () => {
 		});
 
 		it('should throw an exception if CredentialsService.changePassword', async () => {
-			const mockAuthHeader: AuthHeadersDto = {
-				authorization: 'Invalid token',
-			};
-
+			const mockAuthHeader = 'Invalid token';
+			
 			const mockNewPassword: ChangePasswordRequestDto = {
 				password: faker.internet.password(),
 			};

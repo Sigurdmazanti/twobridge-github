@@ -38,20 +38,23 @@ export const mapShopifyGetUserInfo = (
 	const r: GetUserInfoResponseDto = {};
 
 	// Safely map the fields with if statements
-	if (c?.id) r.id = c.id;
-	if (c?.displayName) r.userName = c.displayName;
-	if (c?.firstName && c?.lastName) r.name = `${c.firstName} ${c.lastName}`;
-	if (c?.firstName) r.firstName = c.firstName;
-	if (c?.lastName) r.lastName = c.lastName;
-	if (c?.phone) r.phone = c.phone;
-	if (c?.email) r.email = c.email;
+	if (c?.id !== undefined) r.id = c.id;
+	if (c?.displayName !== undefined) r.userName = c.displayName;
+	if (c?.firstName !== undefined && c?.lastName !== undefined) r.name = `${c.firstName} ${c.lastName}`;
+	if (c?.firstName !== undefined) r.firstName = c.firstName;
+	if (c?.lastName !== undefined) r.lastName = c.lastName;
+	if (c?.phone !== undefined) r.phone = c.phone;
+	if (c?.email !== undefined) r.email = c.email;
 
-	if (a.address1) r.address = a.address1;
-	if (a.address2) r.address2 = a.address2;
-	if (a.city) r.city = a.city;
-	if (a.zip) r.zip = a.zip;
-	if (a.country) r.country = a.country;
-	if (a.countryCodeV2) r.countryCode = a.countryCodeV2;
+	if (a.address1 !== undefined) r.address = a.address1;
+	if (a.address2 !== undefined) r.address2 = a.address2;
+	if (a.city !== undefined) r.city = a.city;
+	if (a.zip !== undefined) r.zip = a.zip;
+	if (a.country !== undefined) r.country = a.country;
+	if (a.countryCodeV2 !== undefined) r.countryCode = a.countryCodeV2;
+	if(a.test !== undefined) r.countryCode = a.test;
 
 	return r;
 };
+//TODO: SET UNDEFINED VALUES
+

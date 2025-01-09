@@ -1,14 +1,20 @@
 import { firstValueFrom } from 'rxjs';
 import { HttpService } from '@nestjs/axios';
 import { handleError, handleShopifyError } from '../../utils/return-utils';
-import { AuthHeadersDto } from 'src/common/dto/headers-auth.dto';
 import { splitBearerToken } from '../../utils/headers-utils';
 import { detectShopifyErrors } from './get-error-code-util';
 import { GetShopifyCustomerIdByTokenResponse } from 'src/common/dto/shopify/get-customer-id-by-token.dto';
 import { mapGetShopifyCustomerIdByTokenResponse } from 'src/common/mapping/shopify/get-customer-id-by-token.mapper';
 
+/**
+ * Retrieves the Shopify customer ID associated with a given customer access token.
+ *
+ * @param {string} authHeader - The authorization header containing the Bearer token.
+ * @param {HttpService} httpService - The HTTP service used to make the API request.
+ * @returns {Promise<string>} The Shopify customer ID if successful.
+ */
 export async function getShopifyCustomerIdByToken(
-	authHeader: AuthHeadersDto,
+	authHeader: string,
 	httpService: HttpService,
 ): Promise<string> {
 	try {
@@ -18,7 +24,7 @@ export async function getShopifyCustomerIdByToken(
 			}
 		}`;
 
-		const splitToken = splitBearerToken(authHeader.authorization);
+		const splitToken = splitBearerToken(authHeader);
 
 		const response = await firstValueFrom(
 			httpService.post(

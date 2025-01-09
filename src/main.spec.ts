@@ -27,18 +27,14 @@ describe('Main Application', () => {
 			enableCors: jest.fn(),
 			setGlobalPrefix: jest.fn(),
 			getHttpServer: jest.fn().mockReturnValue({
-				get: jest
-					.fn()
-					.mockResolvedValue({
-						statusCode: 200,
-						body: { message: 'Hello' },
-					}),
-				post: jest
-					.fn()
-					.mockResolvedValue({
-						statusCode: 200,
-						body: { message: 'Created' },
-					}),
+				get: jest.fn().mockResolvedValue({
+					statusCode: 200,
+					body: { message: 'Hello' },
+				}),
+				post: jest.fn().mockResolvedValue({
+					statusCode: 200,
+					body: { message: 'Created' },
+				}),
 			}),
 		};
 

@@ -1,7 +1,6 @@
 import { HttpService } from '@nestjs/axios';
 import { firstValueFrom } from 'rxjs';
 import { CredentialsStrategy } from '../interfaces/credentials-strategy.interface';
-import { AuthHeadersDto } from 'src/common/dto/headers-auth.dto';
 import {
 	handleError,
 	handleResponse,
@@ -19,7 +18,7 @@ export class ShopifyCredentialsStrategy implements CredentialsStrategy {
 	constructor(private readonly httpService: HttpService) {}
 
 	async changePassword(
-		authHeader: AuthHeadersDto,
+		authHeader: string,
 		resetPassword: ChangePasswordRequestDto,
 	): Promise<ChangePasswordResponseDto> {
 		try {
@@ -27,7 +26,7 @@ export class ShopifyCredentialsStrategy implements CredentialsStrategy {
 				authHeader,
 				this.httpService,
 			);
-			const token = splitBearerToken(authHeader.authorization);
+			const token = splitBearerToken(authHeader);
 
 			const query = `mutation customerReset($id: ID!, $input: CustomerResetInput!) {
                 customerReset(id: $id, input: $input) {

@@ -9,7 +9,6 @@ import {
 import { Response } from 'express';
 import { CredentialsService } from './credentials.service';
 import { sendResponse } from 'src/common/helpers/utils/return-utils';
-import { AuthHeadersDto } from 'src/common/dto/headers-auth.dto';
 import { ChangePasswordRequestDto } from './dto/change-password.dto';
 import {
 	ApiBody,
@@ -39,7 +38,7 @@ export class CredentialsController {
 	})
 	@Patch('changePassword')
 	async changePassword(
-		@Headers('authorization') authHeader: AuthHeadersDto,
+		@Headers('authorization') authHeader: string,
 		@Body() resetPassword: ChangePasswordRequestDto,
 		@Res() res: Response,
 	) {

@@ -1,6 +1,5 @@
 import { HttpService } from '@nestjs/axios';
 import { firstValueFrom } from 'rxjs';
-import { AuthHeadersDto } from 'src/common/dto/headers-auth.dto';
 import {
 	handleError,
 	handleResponse,
@@ -24,10 +23,10 @@ export class ShopifyUserInfoStrategy implements UserInfoStrategy {
 	constructor(private readonly httpService: HttpService) {}
 
 	async getUserInfo(
-		authHeader: AuthHeadersDto,
+		authHeader: string,
 	): Promise<GetUserInfoResponseDto> {
 		try {
-			const token = splitBearerToken(authHeader.authorization);
+			const token = splitBearerToken(authHeader);
 
 			const query = `query getUserInfo($customerAccessToken: String!) {
                 customer(customerAccessToken: $customerAccessToken) {
@@ -81,11 +80,11 @@ export class ShopifyUserInfoStrategy implements UserInfoStrategy {
 	}
 
 	async updateUserInfo(
-		authHeader: AuthHeadersDto,
+		authHeader: string,
 		userInfo: UpdateUserInfoDto,
 	): Promise<GetUserInfoResponseDto> {
 		try {
-			const token = splitBearerToken(authHeader.authorization);
+			const token = splitBearerToken(authHeader);
 
 			const query = `mutation customerUpdate($customer: CustomerUpdateInput!, $customerAccessToken: String!) {
                 customerUpdate(customer: $customer, customerAccessToken: $customerAccessToken) {

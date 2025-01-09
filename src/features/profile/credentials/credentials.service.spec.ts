@@ -3,7 +3,6 @@ import { CredentialsService } from './credentials.service';
 import { HttpService } from '@nestjs/axios';
 import * as strategyHelper from 'src/common/helpers/strategy-helper';
 import { DynamicwebCredentialsStrategy } from './strategies/dynamicweb-credentials.strategy';
-import { AuthHeadersDto } from 'src/common/dto/headers-auth.dto';
 import {
 	ChangePasswordRequestDto,
 	ChangePasswordResponseDto,
@@ -59,9 +58,7 @@ describe('CredentialsService', () => {
 	});
 
 	it('should call changePassword on the strategy', async () => {
-		const mockAuthHeader: AuthHeadersDto = {
-			authorization: 'Bearer current-token',
-		};
+		const mockAuthHeader = 'Bearer current-token';
 
 		const mockNewPassword: ChangePasswordRequestDto = {
 			password: faker.internet.password(),

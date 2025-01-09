@@ -5,10 +5,7 @@ import {
 	handleResponse,
 	handleShopifyError,
 } from 'src/common/helpers/utils/return-utils';
-import { AuthHeadersDto } from 'src/common/dto/headers-auth.dto';
-import {
-	splitBearerToken,
-} from 'src/common/helpers/utils/headers-utils';
+import { splitBearerToken } from 'src/common/helpers/utils/headers-utils';
 import { OrdersStrategy } from '../interfaces/orders-strategy.interface';
 import {
 	GetUserOrdersQueryParamsDto,
@@ -24,12 +21,12 @@ export class ShopifyOrdersStrategy implements OrdersStrategy {
 	constructor(private readonly httpService: HttpService) {}
 
 	async getUserOrders(
-		authHeader: AuthHeadersDto,
+		authHeader: string,
 		queryParams: GetUserOrdersQueryParamsDto = {},
 	): Promise<GetUserOrdersResponseDto> {
 		try {
-			const token = splitBearerToken(authHeader.authorization);
-            
+			const token = splitBearerToken(authHeader);
+
 			const mappedQueryParams =
 				mapShopifyGetUserOrdersQueryParams(queryParams);
 

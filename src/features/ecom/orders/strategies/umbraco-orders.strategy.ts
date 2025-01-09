@@ -4,9 +4,7 @@ import {
 	handleError,
 	handleResponse,
 } from 'src/common/helpers/utils/return-utils';
-import { AuthHeadersDto } from 'src/common/dto/headers-auth.dto';
 import {
-	createAuthHeaders,
 	splitBearerToken,
 } from 'src/common/helpers/utils/headers-utils';
 import { OrdersStrategy } from '../interfaces/orders-strategy.interface';
@@ -15,8 +13,6 @@ import {
 	GetUserOrdersResponseDto,
 } from '../dto/get-user-orders.dto';
 import {
-	mapDynamicwebGetUserOrdersQueryParams,
-	mapDynamicwebGetUserOrdersResponse,
 	mapUmbracoGetUserOrdersResponse,
 } from '../mapping/get-user-orders.mapper';
 
@@ -24,11 +20,13 @@ export class UmbracoOrdersStrategy implements OrdersStrategy {
 	constructor(private readonly httpService: HttpService) {}
 
 	async getUserOrders(
-		authHeader: AuthHeadersDto,
+		authHeader: string,
 		queryParams: GetUserOrdersQueryParamsDto = {},
 	): Promise<GetUserOrdersResponseDto> {
 		try {
-			const customerReference = splitBearerToken(authHeader.authorization);
+			const customerReference = splitBearerToken(
+				authHeader,
+			);
 
 			const response = await firstValueFrom(
 				this.httpService.get(

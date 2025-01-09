@@ -4,7 +4,6 @@ import { getStrategyBasedOnConfig } from 'src/common/helpers/strategy-helper';
 import { DynamicwebAuthStrategy } from './strategies/dynamicweb-auth.strategy';
 import { AuthStrategy } from './interfaces/auth-strategy.interface';
 import { SignInRequestDto } from './dto/sign-in.dto';
-import { AuthHeadersDto } from 'src/common/dto/headers-auth.dto';
 import { ShopifyAuthStrategy } from './strategies/shopify-auth.strategy';
 import { UmbracoAuthStrategy } from './strategies/umbraco-auth.strategy';
 
@@ -21,8 +20,10 @@ export class AuthService {
 			{
 				dynamicweb: (httpService) =>
 					new DynamicwebAuthStrategy(httpService),
-				umbraco: (httpService) => new UmbracoAuthStrategy(httpService),
-				shopify: (httpService) => new ShopifyAuthStrategy(httpService),
+				umbraco: (httpService) => 
+					new UmbracoAuthStrategy(httpService),
+				shopify: (httpService) => 
+					new ShopifyAuthStrategy(httpService),
 			},
 			httpService,
 		);

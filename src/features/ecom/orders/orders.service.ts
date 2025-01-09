@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { getStrategyBasedOnConfig } from 'src/common/helpers/strategy-helper';
-import { AuthHeadersDto } from 'src/common/dto/headers-auth.dto';
 import { OrdersStrategy } from './interfaces/orders-strategy.interface';
 import { DynamicwebOrdersStrategy } from './strategies/dynamicweb-orders.strategy';
 import { GetUserOrdersQueryParamsDto } from './dto/get-user-orders.dto';
@@ -31,7 +30,7 @@ export class OrdersService {
 	}
 
 	getUserOrders(
-		authHeader: AuthHeadersDto,
+		authHeader: string,
 		queryParams: GetUserOrdersQueryParamsDto,
 	) {
 		return this.strategy.getUserOrders(authHeader, queryParams);

@@ -6,7 +6,6 @@ import { AuthService } from './auth.service';
 import { SignInRequestDto, SignInResponseDto } from './dto/sign-in.dto';
 import { sendResponse } from 'src/common/helpers/utils/return-utils';
 import { Response } from 'express';
-import { AuthHeadersDto } from 'src/common/dto/headers-auth.dto';
 import { RefreshTokenResponseDto } from './dto/refresh-token.dto';
 import { testDtoValidation } from 'src/common/helpers/test-helper';
 import { axiosError } from 'src/common/helpers/axios-object-helper';

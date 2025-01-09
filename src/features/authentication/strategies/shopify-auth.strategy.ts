@@ -8,7 +8,6 @@ import {
 	handleResponse,
 	handleShopifyError,
 } from 'src/common/helpers/utils/return-utils';
-import { AuthHeadersDto } from 'src/common/dto/headers-auth.dto';
 import { mapShopifySignInResponse } from '../mapping/sign-in.mapper';
 import { mapShopifyRefreshTokenResponse } from '../mapping/refresh-token.mapper';
 import { ApiResponseDto } from 'src/common/dto/api-response.dto';

@@ -1,11 +1,9 @@
 import { HttpService } from '@nestjs/axios';
 import { firstValueFrom } from 'rxjs';
-import { plainToClass } from 'class-transformer';
 import {
 	handleError,
 	handleResponse,
 } from 'src/common/helpers/utils/return-utils';
-import { AuthHeadersDto } from 'src/common/dto/headers-auth.dto';
 import { createAuthHeaders } from 'src/common/helpers/utils/headers-utils';
 import { OrdersStrategy } from '../interfaces/orders-strategy.interface';
 import {
@@ -21,11 +19,11 @@ export class DynamicwebOrdersStrategy implements OrdersStrategy {
 	constructor(private readonly httpService: HttpService) {}
 
 	async getUserOrders(
-		authHeader: AuthHeadersDto,
+		authHeader: string,
 		queryParams: GetUserOrdersQueryParamsDto = {},
 	): Promise<GetUserOrdersResponseDto> {
 		try {
-			const refreshHeaders = createAuthHeaders(authHeader.authorization);
+			const refreshHeaders = createAuthHeaders(authHeader);
 			const mappedQueryParams =
 				mapDynamicwebGetUserOrdersQueryParams(queryParams);
 			const queryString = new URLSearchParams(

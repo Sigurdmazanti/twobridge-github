@@ -8,7 +8,6 @@ import {
 	handleError,
 	handleResponse,
 } from 'src/common/helpers/utils/return-utils';
-import { AuthHeadersDto } from 'src/common/dto/headers-auth.dto';
 import { createAuthHeaders } from 'src/common/helpers/utils/headers-utils';
 
 export class UmbracoAuthStrategy implements AuthStrategy {

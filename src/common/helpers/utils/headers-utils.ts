@@ -1,5 +1,3 @@
-import { AuthHeadersDto } from 'src/common/dto/headers-auth.dto';
-
 /**
  * Creates an HTTP authorization header object.
  *
@@ -23,22 +21,23 @@ export function createAuthHeaders(authHeader?: string): {} {
 	return {};
 }
 
-export function splitBearerToken(
-	authHeader: string,
-): string | null {
-	// const aHeader =
-	// 	typeof authHeader === 'string' ? authHeader : authHeader.authorization;
-	const aHeader = authHeader;
-	const parts = aHeader.split(' ');
+/**
+ * Splits an authorization header to extract the Bearer token.
+ *
+ * @param {string} authHeader - The authorization header containing the Bearer token.
+ * @returns {string | null} The extracted Bearer token if valid, or `null` if the header is invalid.
+ * 
+ */
+export function splitBearerToken(authHeader: string): string | null {
+    const parts = authHeader.split(' ');
 
-	if (parts.length === 2) {
-		const scheme = parts[0];
-		const credentials = parts[1];
+    if (parts.length === 2) {
+        const [scheme, credentials] = parts;
 
-		if (/^Bearer$/i.test(scheme)) {
-			return credentials;
-		}
-	}
+        if (/^Bearer$/i.test(scheme)) {
+            return credentials;
+        }
+    }
 
-	return null;
+    return null;
 }

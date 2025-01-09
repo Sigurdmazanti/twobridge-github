@@ -1,6 +1,5 @@
 import { HttpService } from '@nestjs/axios';
 import { firstValueFrom } from 'rxjs';
-import { AuthHeadersDto } from 'src/common/dto/headers-auth.dto';
 import {
 	handleError,
 	handleResponse,
@@ -16,10 +15,10 @@ export class DynamicwebUserInfoStrategy implements UserInfoStrategy {
 	constructor(private readonly httpService: HttpService) {}
 
 	async getUserInfo(
-		authHeader: AuthHeadersDto,
+		authHeader: string,
 	): Promise<GetUserInfoResponseDto> {
 		try {
-			const refreshHeaders = createAuthHeaders(authHeader.authorization);
+			const refreshHeaders = createAuthHeaders(authHeader);
 
 			const response = await firstValueFrom(
 				this.httpService.get(
@@ -36,11 +35,11 @@ export class DynamicwebUserInfoStrategy implements UserInfoStrategy {
 	}
 
 	async updateUserInfo(
-		authHeader: AuthHeadersDto,
+		authHeader: string,
 		userInfo: UpdateUserInfoDto,
 	): Promise<GetUserInfoResponseDto> {
 		try {
-			const refreshHeaders = createAuthHeaders(authHeader.authorization);
+			const refreshHeaders = createAuthHeaders(authHeader);
 
 			const response = await firstValueFrom(
 				this.httpService.patch(

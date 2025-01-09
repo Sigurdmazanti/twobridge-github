@@ -8,12 +8,14 @@ describe('Headers utility functions', () => {
 		});
 
 		it('should return an object with the authorization header if authHeader is provided', () => {
-			const mockAuthHeader: AuthHeadersDto = {
-				authorization: 'Bearer token',
-			};
+			const mockAuthHeader = 'Bearer current-token';
 
-			expect(createAuthHeaders(mockAuthHeader.authorization)).toEqual(
-				mockAuthHeader,
+			const mockResponse: AuthHeadersDto = {
+				authorization: mockAuthHeader
+			}
+
+			expect(createAuthHeaders(mockAuthHeader)).toEqual(
+				mockResponse
 			);
 		});
 

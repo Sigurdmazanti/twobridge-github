@@ -59,6 +59,7 @@ export function handleError<T = any>(error: any): ApiErrorResponseDto {
 
 	throw new ApiErrorResponseDto(statusCode, 'Unknown error occurred');
 }
+
 /**
  * Handles the response from an Axios request and formats it into a consistent structure.
  *
@@ -72,7 +73,6 @@ export function handleError<T = any>(error: any): ApiErrorResponseDto {
  * @param response - The AxiosResponse containing the response data from the external API.
  * @returns An ApiResponseDto with a `message` and/or JSON-data from the external API and a `statusCode`.
  *
- * @template T - The type of the response data, which can be any type (string, object, etc.).
  */
 export function handleResponse(response: AxiosResponse): ApiResponseDto {
 	const statusCode = response.data?.status || response.status || 200;

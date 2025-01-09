@@ -10,9 +10,7 @@ import { ShopifyErrorCode } from 'src/common/interfaces/shopify/error-codes.inte
  * @param {any} response - The Shopify response object to extract error codes from.
  * @returns {ShopifyErrorCode | null} - The first error code found, or `null` if no error code is found.
  */
-export function detectShopifyErrors(
-	response: any,
-): {
+export function detectShopifyErrors(response: any): {
 	status: number;
 	function: string;
 	from?: string;

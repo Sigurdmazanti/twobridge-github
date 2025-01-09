@@ -7,7 +7,6 @@ import {
 	Body,
 	HttpException,
 } from '@nestjs/common';
-import { AuthHeadersDto } from 'src/common/dto/headers-auth.dto';
 import { UserInfoService } from './user-info.service';
 import { sendResponse } from 'src/common/helpers/utils/return-utils';
 import { Response } from 'express';
@@ -38,7 +37,7 @@ export class UserInfoController {
 		type: GetUserInfoResponseDto,
 	})
 	async getUserInfo(
-		@Headers('authorization') authHeader: AuthHeadersDto,
+		@Headers('authorization') authHeader: string,
 		@Res() res: Response,
 	) {
 		try {
@@ -66,7 +65,7 @@ export class UserInfoController {
 		type: GetUserInfoResponseDto,
 	})
 	async updateUserInfo(
-		@Headers('authorization') authHeader: AuthHeadersDto,
+		@Headers('authorization') authHeader: string,
 		@Body() userInfo: UpdateUserInfoDto,
 		@Res() res: Response,
 	) {

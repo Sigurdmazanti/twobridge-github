@@ -82,7 +82,7 @@ describe('AuthController', () => {
 
 			await expect(
 				controller.signIn(mockCredentials, mockExpressResponse),
-			).rejects.toThrow(new HttpException('Not Found', 404));
+			).rejects.toThrow(new HttpException('Not FoundDDDD', 404));
 		});
 	});
 

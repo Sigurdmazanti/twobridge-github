@@ -5,13 +5,13 @@ export function mapDynamicwebPaymentMethod(
 ): PaymentMethodDto {
 	const mpm: PaymentMethodDto = {};
 
-	if (paymentMethod.id) mpm.id = paymentMethod.id;
-	if (paymentMethod.name) mpm.name = paymentMethod.name;
-	if (paymentMethod.description) mpm.description = paymentMethod.description;
-	if (paymentMethod.icon) mpm.icon = paymentMethod.icon;
-	if (paymentMethod.code) mpm.code = paymentMethod.code;
-	if (paymentMethod.termsCode) mpm.termsCode = paymentMethod.termsCode;
-	if (paymentMethod.termsDescription)
+	if (paymentMethod.id !== undefined) mpm.id = paymentMethod.id;
+	if (paymentMethod.name !== undefined) mpm.name = paymentMethod.name;
+	if (paymentMethod.description !== undefined) mpm.description = paymentMethod.description;
+	if (paymentMethod.icon !== undefined) mpm.icon = paymentMethod.icon;
+	if (paymentMethod.code !== undefined) mpm.code = paymentMethod.code;
+	if (paymentMethod.termsCode !== undefined) mpm.termsCode = paymentMethod.termsCode;
+	if (paymentMethod.termsDescription !== undefined)
 		mpm.termsDescription = paymentMethod.termsDescription;
 
 	return mpm;

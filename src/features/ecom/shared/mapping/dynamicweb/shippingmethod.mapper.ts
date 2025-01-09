@@ -5,21 +5,21 @@ export function mapDynamicwebShippingMethod(
 ): ShippingMethodDto {
 	const msp: ShippingMethodDto = {};
 
-	if (shippingMethod.id) msp.id = shippingMethod.id;
-	if (shippingMethod.name) msp.name = shippingMethod.name;
-	if (shippingMethod.description)
+	if (shippingMethod.id !== undefined) msp.id = shippingMethod.id;
+	if (shippingMethod.name !== undefined) msp.name = shippingMethod.name;
+	if (shippingMethod.description !== undefined)
 		msp.description = shippingMethod.description;
-	if (shippingMethod.icon) msp.icon = shippingMethod.icon;
-	if (shippingMethod.priceOverMaxWeight)
+	if (shippingMethod.icon !== undefined) msp.icon = shippingMethod.icon;
+	if (shippingMethod.priceOverMaxWeight !== undefined)
 		msp.priceOverMaxWeight = shippingMethod.priceOverMaxWeight;
-	if (shippingMethod.freeFeeAmount)
+	if (shippingMethod.freeFeeAmount !== undefined)
 		msp.freeFeeAmount = shippingMethod.freeFeeAmount;
-	if (shippingMethod.code) msp.code = shippingMethod.code;
-	if (shippingMethod.agentCode) msp.agentCode = shippingMethod.agentCode;
-	if (shippingMethod.agentName) msp.agentName = shippingMethod.agentName;
-	if (shippingMethod.agentServiceCode)
+	if (shippingMethod.code !== undefined) msp.code = shippingMethod.code;
+	if (shippingMethod.agentCode !== undefined) msp.agentCode = shippingMethod.agentCode;
+	if (shippingMethod.agentName !== undefined) msp.agentName = shippingMethod.agentName;
+	if (shippingMethod.agentServiceCode !== undefined)
 		msp.agentServiceCode = shippingMethod.agentServiceCode;
-	if (shippingMethod.agentServiceDescription)
+	if (shippingMethod.agentServiceDescription !== undefined)
 		msp.agentServiceDescription = shippingMethod.agentServiceDescription;
 
 	return msp;

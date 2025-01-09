@@ -79,11 +79,11 @@ export const mapShopifyGetUserOrdersResponse = (
 		},
 	};
 
-	if (o.totalCount)
+	if (o.totalCount !== undefined)
 		r.totalOrdersCount = !isNaN(Number(o.totalCount))
 			? Number(o.totalCount)
 			: 0;
-	if (o.pageInfo?.endCursor) r.afterCursor = o.pageInfo.endCursor;
+	if (o.pageInfo?.endCursor !== undefined) r.afterCursor = o.pageInfo.endCursor;
 
 	r.orders = oEdges.map((order: any) => mapShopifyOrder(order.node, cInfo));
 
@@ -96,10 +96,10 @@ export const mapUmbracoGetUserOrdersResponse = (
 ): Partial<GetUserOrdersResponseDto> => {
 	const r: Partial<GetUserOrdersResponseDto> = {};
 
-	if (Array.isArray(q) && q.length) {
+	if (q !== undefined && Array.isArray(q) && q.length) {
 		r.totalOrdersCount = q.length;
 
-		if (queryParams?.pageSize) {
+		if (queryParams?.pageSize !== undefined) {
 			const pageSize = queryParams.pageSize;
 			const currentPage = queryParams.currentPage || 1;
 			const startIndex = (currentPage - 1) * pageSize;

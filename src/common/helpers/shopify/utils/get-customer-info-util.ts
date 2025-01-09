@@ -3,7 +3,6 @@ import { HttpService } from '@nestjs/axios';
 import { handleError, handleShopifyError } from '../../utils/return-utils';
 import { splitBearerToken } from '../../utils/headers-utils';
 import { detectShopifyErrors } from './get-error-code-util';
-import { GetShopifyCustomerIdByTokenResponse } from 'src/common/dto/shopify/get-customer-id-by-token.dto';
 import { mapGetShopifyCustomerIdByTokenResponse } from 'src/common/mapping/shopify/get-customer-id-by-token.mapper';
 
 /**

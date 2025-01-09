@@ -8,9 +8,9 @@ export function mapShopifyPrice(
 	const dp = discountedPrice;
 	const op = originalPrice;
 
-	if (dp.amount) mp.price = Number(dp.amount);
-	if (dp.currencyCode) mp.currencyCode = dp.currencyCode;
-	if (dp.currencyCode && dp.amount)
+	if (dp.amount !== undefined) mp.price = Number(dp.amount);
+	if (dp.currencyCode !== undefined) mp.currencyCode = dp.currencyCode;
+	if (dp.currencyCode !== undefined && dp.amount !== undefined)
 		mp.priceFormatted = `${dp.amount} ${dp.currencyCode}`;
 
 	return mp;
@@ -19,9 +19,9 @@ export function mapShopifyPrice(
 export function mapShopifyUnitPrice(price: any): PriceDto {
 	const mp: PriceDto = {};
 
-	if (price.amount) mp.price = price.amount;
-	if (price.currencyCode) mp.price = price.currencyCode;
-	if (price.currencyCode && price.amount)
+	if (price.amount !== undefined) mp.price = price.amount;
+	if (price.currencyCode !== undefined) mp.price = price.currencyCode;
+	if (price.currencyCode !== undefined && price.amount !== undefined)
 		mp.priceFormatted = `${price.amount} ${price.currencyCode}`;
 
 	return mp;

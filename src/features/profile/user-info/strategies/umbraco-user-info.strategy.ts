@@ -53,8 +53,3 @@ export class UmbracoUserInfoStrategy implements UserInfoStrategy {
 		}
 	}
 }
-
-//TODO: CREATE DATA ON DW SITE
-//TODO: FIND DEPLOYMENT PLACE
-//TODO: CREATE PIPELINE
-//TODO: CREATE CI/CD

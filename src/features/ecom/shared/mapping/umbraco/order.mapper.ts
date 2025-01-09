@@ -8,93 +8,93 @@ import { mapUmbracoShippingMethod } from './shippingmethod.mapper';
 export function mapUmbracoOrder(o: any): OrderDto {
 	const mo = new OrderDto();
 
-	if (o.currency?.code) mo.currencyCode = o.currency.code;
-	if (o.paymentInfo?.country?.code)
+	if (o.currency?.code !== undefined) mo.currencyCode = o.currency.code;
+	if (o.paymentInfo?.country?.code !== undefined)
 		mo.countryCode = o.paymentInfo.country.code;
-	if (o.languageIsoCode) mo.languageId = o.languageIsoCode;
-	if (o.id) mo.id = o.id;
-	if (o.orderNumber) mo.secret = o.orderNumber;
-	if (o.secondaryUserId) mo.secondaryUserId = o.secondaryUserId;
-	if (o.secondaryUserName) mo.secondaryUserName = o.secondaryUserName;
-	if (o.shopId) mo.shopId = o.shopId;
-	if (o.createDate) mo.createdAt = o.createDate;
-	if (o.updateDate) mo.modified = o.updateDate;
-	if (o.completedDate) mo.completedDate = o.completedDate;
-	if (o.isFinalized) mo.completed = o.isFinalized;
-	if (o.customerInfo?.customerReference)
+	if (o.languageIsoCode !== undefined) mo.languageId = o.languageIsoCode;
+	if (o.id !== undefined) mo.id = o.id;
+	if (o.orderNumber !== undefined) mo.secret = o.orderNumber;
+	if (o.secondaryUserId !== undefined) mo.secondaryUserId = o.secondaryUserId;
+	if (o.secondaryUserName !== undefined) mo.secondaryUserName = o.secondaryUserName;
+	if (o.shopId !== undefined) mo.shopId = o.shopId;
+	if (o.createDate !== undefined) mo.createdAt = o.createDate;
+	if (o.updateDate !== undefined) mo.modified = o.updateDate;
+	if (o.completedDate !== undefined) mo.completedDate = o.completedDate;
+	if (o.isFinalized !== undefined) mo.completed = o.isFinalized;
+	if (o.customerInfo?.customerReference !== undefined)
 		mo.customerUserId = o.customerInfo.customerReference;
-	if (o.customerNumber) mo.customerNumber = o.customerNumber;
-	if (o.customerEan) mo.customerEan = o.customerEan;
-	if (o.customerRefId) mo.customerRefId = o.customerRefId;
-	if (o.properties?.company) mo.customerCompany = o.properties.company;
-	if (o.customerTitle) mo.customerTitle = o.customerTitle;
-	if (o.properties?.firstName && o.properties?.lastName)
+	if (o.customerNumber !== undefined) mo.customerNumber = o.customerNumber;
+	if (o.customerEan !== undefined) mo.customerEan = o.customerEan;
+	if (o.customerRefId !== undefined) mo.customerRefId = o.customerRefId;
+	if (o.properties?.company !== undefined) mo.customerCompany = o.properties.company;
+	if (o.customerTitle !== undefined) mo.customerTitle = o.customerTitle;
+	if (o.properties?.firstName && o.properties?.lastName !== undefined)
 		mo.customerName = `${o.properties.firstName} ${o.properties.lastName}`;
-	if (o.properties?.firstName) mo.customerFirstName = o.properties?.firstName;
-	if (o.properties?.lastName) mo.customerSurname = o.properties?.lastName;
-	if (o.customerMiddleName) mo.customerMiddleName = o.customerMiddleName;
-	if (o.customerHouseNumber) mo.customerHouseNumber = o.customerHouseNumber;
-	if (o.customerInitials) mo.customerInitials = o.customerInitials;
-	if (o.customerPrefix) mo.customerPrefix = o.customerPrefix;
-	if (o.properties?.billingAddressLine1)
+	if (o.properties?.firstName !== undefined) mo.customerFirstName = o.properties?.firstName;
+	if (o.properties?.lastName !== undefined) mo.customerSurname = o.properties?.lastName;
+	if (o.customerMiddleName !== undefined) mo.customerMiddleName = o.customerMiddleName;
+	if (o.customerHouseNumber !== undefined) mo.customerHouseNumber = o.customerHouseNumber;
+	if (o.customerInitials !== undefined) mo.customerInitials = o.customerInitials;
+	if (o.customerPrefix !== undefined) mo.customerPrefix = o.customerPrefix;
+	if (o.properties?.billingAddressLine1 !== undefined)
 		mo.customerAddress = o.properties.billingAddressLine1;
-	if (o.properties?.billingAddressLine2)
+	if (o.properties?.billingAddressLine2 !== undefined)
 		mo.customerAddress2 = o.properties.billingAddressLine2;
-	if (o.properties?.billingZipCode)
+	if (o.properties?.billingZipCode !== undefined)
 		mo.customerZip = o.properties.billingZipCode;
-	if (o.properties?.billingCity) mo.customerCity = o.properties?.billingCity;
-	if (o.customerCountry) mo.customerCountry = o.customerCountry;
-	if (o.shippingInfo?.country?.code)
+	if (o.properties?.billingCity !== undefined) mo.customerCity = o.properties?.billingCity;
+	if (o.customerCountry !== undefined) mo.customerCountry = o.customerCountry;
+	if (o.shippingInfo?.country?.code !== undefined)
 		mo.customerCountryCode = o.shippingInfo.country.code;
-	if (o.customerRegion) mo.customerRegion = o.customerRegion;
-	if (o.properties?.telephone) mo.customerPhone = o.properties.telephone;
-	if (o.properties?.email) mo.customerEmail = o.properties.email;
-	if (o.customerCell) mo.customerCell = o.customerCell;
-	if (o.customerAccepted) mo.customerAccepted = o.customerAccepted;
-	if (o.properties?.comments) mo.customerComment = o.properties.comments;
-	if (o.properties?.company) mo.deliveryCompany = o.properties.company;
-	if (o.properties?.shippingFirstName && o.properties?.shippingLastName)
+	if (o.customerRegion !== undefined) mo.customerRegion = o.customerRegion;
+	if (o.properties?.telephone !== undefined) mo.customerPhone = o.properties.telephone;
+	if (o.properties?.email !== undefined) mo.customerEmail = o.properties.email;
+	if (o.customerCell !== undefined) mo.customerCell = o.customerCell;
+	if (o.customerAccepted !== undefined) mo.customerAccepted = o.customerAccepted;
+	if (o.properties?.comments !== undefined) mo.customerComment = o.properties.comments;
+	if (o.properties?.company !== undefined) mo.deliveryCompany = o.properties.company;
+	if (o.properties?.shippingFirstName && o.properties?.shippingLastName !== undefined)
 		mo.deliveryName = `${o.properties.shippingFirstName} ${o.properties.shippingLastName}`;
-	if (o.properties?.shippingFirstName)
+	if (o.properties?.shippingFirstName !== undefined)
 		mo.deliveryFirstName = o.properties.shippingFirstName;
-	if (o.properties?.shippingLastName)
+	if (o.properties?.shippingLastName !== undefined)
 		mo.deliverySurname = o.properties.shippingLastName;
-	if (o.deliveryMiddleName) mo.deliveryMiddleName = o.deliveryMiddleName;
-	if (o.deliveryTitle) mo.deliveryTitle = o.deliveryTitle;
-	if (o.deliveryHouseNumber) mo.deliveryHouseNumber = o.deliveryHouseNumber;
-	if (o.deliveryInitials) mo.deliveryInitials = o.deliveryInitials;
-	if (o.deliveryPrefix) mo.deliveryPrefix = o.deliveryPrefix;
-	if (o.properties?.shippingAddressLine1)
+	if (o.deliveryMiddleName !== undefined) mo.deliveryMiddleName = o.deliveryMiddleName;
+	if (o.deliveryTitle !== undefined) mo.deliveryTitle = o.deliveryTitle;
+	if (o.deliveryHouseNumber !== undefined) mo.deliveryHouseNumber = o.deliveryHouseNumber;
+	if (o.deliveryInitials !== undefined) mo.deliveryInitials = o.deliveryInitials;
+	if (o.deliveryPrefix !== undefined) mo.deliveryPrefix = o.deliveryPrefix;
+	if (o.properties?.shippingAddressLine1 !== undefined)
 		mo.deliveryAddress = o.properties.shippingAddressLine1;
-	if (o.properties?.shippingAddressLine2)
+	if (o.properties?.shippingAddressLine2 !== undefined)
 		mo.deliveryAddress2 = o.properties.shippingAddressLine2;
-	if (o.properties?.shippingZipCode)
+	if (o.properties?.shippingZipCode !== undefined)
 		mo.deliveryZip = o.properties.shippingZipCode;
-	if (o.properties?.shippingCity) mo.deliveryCity = o.properties.shippingCity;
-	if (o.shippingInfo?.country?.name)
+	if (o.properties?.shippingCity !== undefined) mo.deliveryCity = o.properties.shippingCity;
+	if (o.shippingInfo?.country?.name !== undefined)
 		mo.deliveryCountry = o.shippingInfo.country.name;
-	if (o.shippingInfo?.country?.code)
+	if (o.shippingInfo?.country?.code !== undefined)
 		mo.deliveryCountryCode = o.shippingInfo.country.code;
-	if (o.deliveryRegion) mo.deliveryRegion = o.deliveryRegion;
-	if (o.properties?.telephone) mo.deliveryPhone = o.properties.telephone;
-	if (o.properties?.email) mo.deliveryEmail = o.properties.email;
-	if (o.deliveryCell) mo.deliveryCell = o.deliveryCell;
-	if (o.orderLines)
+	if (o.deliveryRegion !== undefined) mo.deliveryRegion = o.deliveryRegion;
+	if (o.properties?.telephone !== undefined) mo.deliveryPhone = o.properties.telephone;
+	if (o.properties?.email !== undefined) mo.deliveryEmail = o.properties.email;
+	if (o.deliveryCell !== undefined) mo.deliveryCell = o.deliveryCell;
+	if (o.orderLines !== undefined)
 		mo.orderLines = o.orderLines.map((ol: OrderLineDto) =>
 			mapUmbracoOrderline(ol),
 		);
-	if (o.transactionInfo?.authorizedAmount)
+	if (o.transactionInfo?.authorizedAmount !== undefined)
 		mo.price = mapUmbracoPrice(o.transactionInfo.authorizedAmount);
-	if (o.subtotalPrice)
+	if (o.subtotalPrice !== undefined)
 		mo.totalPriceWithoutDiscountsFeesAndTaxes = mapUmbracoPrice(
 			o.subtotalPrice,
 		);
-	if (o.totalPrice) mo.priceBeforeFees = mapUmbracoPrice(o.totalPrice);
+	if (o.totalPrice !== undefined) mo.priceBeforeFees = mapUmbracoPrice(o.totalPrice);
 	if (o.shippingInfo?.totalPrice?.value?.withTax !== null)
 		mo.shippingFee = o.shippingInfo.totalPrice.value.withTax;
-	if (o.shippingInfo)
+	if (o.shippingInfo !== undefined)
 		mo.shippingMethod = mapUmbracoShippingMethod(o.shippingInfo);
-	if (o.paymentInfo)
+	if (o.paymentInfo !== undefined)
 		mo.paymentMethod = mapUmbracoPaymentMethod(o.paymentInfo);
 	if (o.transactionInfo?.feeAmount?.value !== null)
 		mo.paymentFee = o.transactionInfo.feeAmount.value;

@@ -1,0 +1,232 @@
+{
+	"info": {
+		"_postman_id": "c9f7a80e-afc0-4b9b-b66c-59004a604c3c",
+		"name": "Twobridge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38889766"
+	},
+	"item": [
+		{
+			"name": "ecom",
+			"item": [
+				{
+					"name": "orders",
+					"item": [
+						{
+							"name": "getUserOrders",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxODkiLCJuYmYiOjE3MzYxMTc3NDksImV4cCI6MTczNjExOTU0OSwiaWF0IjoxNzM2MTE3NzQ5LCJpc3MiOiJEeW5hbWljd2ViIEEvUyIsImF1ZCI6IldlYkFQSSJ9.RsXolJLV1V_AyCwYT9M8L5hwKZrTYyWtMECN_RXGszU",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}ecom/orders/getUserOrders",
+									"host": [
+										"{{API_URL}}ecom"
+									],
+									"path": [
+										"orders",
+										"getUserOrders"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "authentication",
+			"item": [
+				{
+					"name": "/signIn",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"sigmn@live.dk\",\r\n    \"password\": \"Test123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}auth/signIn",
+							"host": [
+								"{{API_URL}}auth"
+							],
+							"path": [
+								"signIn"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/refreshToken",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer asdfsadf",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "authorization",
+								"value": "Bearer 7cbcdef79ff439a0051ad64ddca8c73c",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_URL}}auth/refreshToken",
+							"host": [
+								"{{API_URL}}auth"
+							],
+							"path": [
+								"refreshToken"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "profile",
+			"item": [
+				{
+					"name": "credentials",
+					"item": [
+						{
+							"name": "/changePassword",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "7cbcdef79ff439a0051ad64ddca8c73c",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"password\": \"Test123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}profile/credentials/changePassword",
+									"host": [
+										"{{API_URL}}profile"
+									],
+									"path": [
+										"credentials",
+										"changePassword"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "user-info",
+					"item": [
+						{
+							"name": "/getUserInfo",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "7cbcdef79ff439a0051ad64ddca8c73c",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}profile/user-info/getUserInfo",
+									"host": [
+										"{{API_URL}}profile"
+									],
+									"path": [
+										"user-info",
+										"getUserInfo"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updateUserInfo",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "7cbcdef79ff439a0051ad64ddca8c73c",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"lastName\": \"Nejrup\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}profile/user-info/updateUserInfo",
+									"host": [
+										"{{API_URL}}profile"
+									],
+									"path": [
+										"user-info",
+										"updateUserInfo"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}

@@ -19,6 +19,9 @@ Kan findes på https://twobridge-4a3147f34e5d.herokuapp.com/
 
 For API-dokumentation: https://twobridge-4a3147f34e5d.herokuapp.com/api-docs
 
+## Postman
+Der kan downloades en Postman-collection fra repositoryet til at teste endpoints.
+
 ## User login til testing
 Kan findes i `env.txt`.
 

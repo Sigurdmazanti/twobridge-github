@@ -23,3 +23,6 @@ For API-dokumentation: https://twobridge-4a3147f34e5d.herokuapp.com/api-docs
 Kan findes i `env.txt`.
 
 Bemærk, at der ikke kan sendes login-requests til Shopify på den hosted løsning, da det er en server-side request.
+
+## Authorization header
+Husk at sende en Bearer-token i authorizaton headeren til diverse endpoints.

@@ -14,7 +14,7 @@ Node.js skal være installeret.
 8. Find package.json-filen og kig efter andre `npm` scripts, du ønsker at køre.
 9. Applikationen kører som default i port 3333, men kan ændres i `main.ts`
 
-## Cloudløsning
+## Hosted løsning
 Kan findes på https://twobridge-4a3147f34e5d.herokuapp.com/
 
 For API-dokumentation: https://twobridge-4a3147f34e5d.herokuapp.com/api-docs

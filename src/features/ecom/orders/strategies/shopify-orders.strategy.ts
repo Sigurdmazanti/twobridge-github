@@ -16,6 +16,13 @@ import {
 	mapShopifyGetUserOrdersResponse,
 } from '../mapping/get-user-orders.mapper';
 import { detectShopifyErrors } from 'src/common/helpers/shopify/utils/get-error-code-util';
+import {
+    addressFragment,
+    priceFragment,
+    variantFragment,
+    lineItemFragment,
+    orderFragment,
+} from '../fragments/shopify/get-user-orders.fragments'
 
 export class ShopifyOrdersStrategy implements OrdersStrategy {
 	constructor(private readonly httpService: HttpService) {}
@@ -41,7 +48,14 @@ export class ShopifyOrdersStrategy implements OrdersStrategy {
 			if (mappedQueryParams.sortBy)
 				variables.sortKey = mappedQueryParams.sortBy;
 
-			const query = `query customerOrders(
+			const query = `
+            ${addressFragment}
+            ${priceFragment}
+            ${variantFragment}
+            ${lineItemFragment}
+            ${orderFragment}
+            
+            query customerOrders(
                 $customerAccessToken: String!,
                 $pageSize: Int,
                 $afterCursor: String,
@@ -54,18 +68,11 @@ export class ShopifyOrdersStrategy implements OrdersStrategy {
                     lastName
                     phone
                     email
-
+            
                     defaultAddress {
-                        address1
-                        address2
-                        zip
-                        city
-                        country
-                        countryCodeV2
-                        company
-                        province
+                        ...AddressFields
                     }
-
+            
                     orders(
                         first: $pageSize,
                         after: $afterCursor,
@@ -75,119 +82,17 @@ export class ShopifyOrdersStrategy implements OrdersStrategy {
                             hasNextPage
                             endCursor
                         }
-
+            
                         totalCount
-
+            
                         edges {
                             node {
-                                id
-                                name
-                                orderNumber
-                                processedAt
-                                fulfillmentStatus
-
-                                totalPrice {
-                                    amount
-                                    currencyCode
-                                }
-
-                                subtotalPrice {
-                                    amount
-                                    currencyCode
-                                }
-
-                                currentTotalTax {
-                                    amount
-                                    currencyCode
-                                }
-
-                                currentTotalPrice {
-                                    amount
-                                    currencyCode
-                                }
-
-                                originalTotalPrice {
-                                    amount
-                                    currencyCode
-                                }
-
-                                currentSubtotalPrice {
-                                    amount
-                                    currencyCode
-                                }
-
-                                totalTax {
-                                    amount
-                                    currencyCode
-                                }
-
-                                totalShippingPrice {
-                                    amount
-                                    currencyCode
-                                }
-
-                                originalTotalDuties {
-                                    amount
-                                    currencyCode
-                                }
-
-                                shippingAddress {
-                                    company
-                                    name
-                                    firstName
-                                    lastName
-                                    address1
-                                    address2
-                                    zip
-                                    city
-                                    country
-                                    countryCodeV2
-                                    province
-                                    phone
-                                }
-                                
-                                lineItems(first: 99) {
-                                    edges {
-                                        node {
-                                            title
-                                            quantity
-
-                                            originalTotalPrice {
-                                                amount
-                                                currencyCode
-                                            }
-
-                                            discountedTotalPrice {
-                                                amount
-                                                currencyCode
-                                            }
-
-                                            variant {
-                                                id
-                                                title
-                                                sku
-                                                image {
-                                                    url
-                                                }
-
-                                                product {
-                                                    id
-                                                    title
-                                                }
-
-                                                unitPrice {
-                                                    amount
-                                                    currencyCode
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
+                                ...OrderFields
                             }
                         }
                     }
                 }
-            }`;
+            }`;            
 
 			const response = await firstValueFrom(
 				this.httpService.post(

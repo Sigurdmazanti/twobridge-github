@@ -3,10 +3,13 @@ import { BadRequestException, ValidationPipe } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { ValidationError } from 'class-validator';
+import { AuthGuard } from './common/auth/guards/token.guard';
 
 async function bootstrap() {
 	const app = await NestFactory.create(AppModule);
 	app.enableCors();
+
+	app.useGlobalGuards(new AuthGuard());
 
 	app.useGlobalPipes(
 		new ValidationPipe({
